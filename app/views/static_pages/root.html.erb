@@ -1,0 +1,17 @@
+<% if logged_in? %>
+    <script>
+        window.currentUser = <%= render(
+            "api/users/user.json.jbuilder",
+            user: current_user
+        ).html_safe %>
+    </script>
+<% end %>
+
+<script type="text/javascript">
+    window.connectImgUrl = "<%= image_url("connect.png") %>";
+    window.findFriendsImgUrl = "<%= image_url("find_friends.png") %>";
+    window.lifeUpdatesImgUrl = "<%= image_url("life_updates.png") %>";
+    window.searchImgUrl = "<%= image_url("search.png") %>";
+</script>
+
+<div id='root'></div>
