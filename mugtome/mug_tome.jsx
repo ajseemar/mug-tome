@@ -3,12 +3,32 @@ import ReactDOM from 'react-dom';
 
 import Root from './root';
 
-import { login, signup, logout } from './utils/session_api';
+import { login, signup, logout } from './actions/session_actions';
 import configureStore from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const root = document.getElementById('root');
-    const store = configureStore();
+    let preloadedState = {};
+    if (window.window.currentUser) {
+        preloadedState = {
+            entities: {
+                users: {
+                    [window.currentUser.id]: window.currentUser
+                },
+                friendRequests: {
+                    incoming: {},
+                    outgoing: {}
+                }
+            },
+            errors: {
+                session: []
+            },
+            session: {
+                id: window.currentUser.id
+            }
+        };
+        delete window.currentUser;
+    }
+    const store = configureStore(preloadedState);
 
     // ------ Temporary Global Variables for Debugging Purposes --------------
 
@@ -22,5 +42,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------------------------
 
 
-    ReactDOM.render(<Root store={store} />, root);
+    ReactDOM.render(<Root store={store} />, document.getElementById('root'));
 });

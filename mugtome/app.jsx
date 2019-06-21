@@ -1,11 +1,25 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 
-import Greeting from './components/greeting';
+import AuthRoute from './components/auth/auth_route';
+import ProtectedRoute from './components/auth/protected_route';
+
+import GreetingContainer from './components/session/greeting_container';
+import ProfileContainer from './components/user/profile_container';
+import FindFriendsContainer from './components/friends/find_friends_container';
+import Home from './components/home/home';
 
 const App = () => (
     <div id='app-container'>
-        <Route path="/" component={ Greeting } />
+        {/* <Route path="/" component={ GreetingContainer } /> */}
+        {/* <ProtectedRoute path="/users" component={NavbarContainer} /> */}
+        <Switch>
+            <AuthRoute exact path="/" component={GreetingContainer} />
+            <ProtectedRoute path="/users/:user_fn/:user_ln/:id" component={ProfileContainer} />
+            <ProtectedRoute path="/home/find_friends" component={FindFriendsContainer} />
+            <ProtectedRoute exact path="/home" component={Home} />
+            <Redirect to='/' />
+        </Switch>
     </div>
 );
 

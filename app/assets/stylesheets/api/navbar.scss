@@ -1,0 +1,89 @@
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4267b2;
+    border-bottom: 1px solid #29487d;
+    color: #fff;
+    height: 42px;
+}
+
+.navbar {
+    width: 55%;
+    display: flex;
+    justify-content: space-around;
+
+    .logo {
+        width: 28px;
+        height: 28px;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        border-radius: 2px;
+        
+        font-size: 32px;
+        font-weight: 800;
+        color: #4267b2;
+    }
+
+    hr {
+        width: 1px;
+        height: 80%;
+        background: rgba(0, 0, 0, .1);
+    }
+
+    .logout-button-container {
+        display: flex;
+        align-content: center;
+
+        #logout-button {
+            border: none;
+            background: none;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+    }
+}
+
+.profile-page-link-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+
+    i {
+        font-size: 24px;
+        margin: 0px 8px;
+    }
+    // .fas.fa-user-circle {
+    //     width: 24px;
+    //     height: 24px;
+    // }
+
+    // .fas.fa-user-circle::before {
+    //     width: 24px;
+    //     height: 24px;
+    // }
+
+    .profile-page-link {
+        font-weight: bold;
+        font-size: 12px;
+        margin: 0px 5px;
+    }
+}
+
+.page-link-container {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+
+    .page-link {
+        font-weight: bold;
+        font-size: 12px;
+        margin: 0px 5px;
+    }
+}

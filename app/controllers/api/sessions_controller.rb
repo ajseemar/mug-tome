@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
             render 'api/users/show'
             return
         else
-            render json: {errorList: ["Invalid combination of username and password", "Please try again"], type: "Log In"}, status: 422
+            render json: {errors: ["Invalid combination of username and password", "Please try again"], type: "Log In"}, status: 422
         end
     end
 

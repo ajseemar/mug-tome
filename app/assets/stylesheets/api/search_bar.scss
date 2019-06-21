@@ -1,0 +1,26 @@
+.search-results {
+    position: fixed;
+    color: #1d2129;
+    width: 450px;
+}
+
+.search-bar {
+    border: 1px solid rgba(0, 0, 0, 0);
+    input {
+        color: #1d2129;
+        height: 18px;
+        width: 398px;
+        font-size: 14px;
+        text-overflow: ellipsis;
+        cursor: text;
+    }
+
+    button {
+        background: #f5f6f7;
+        border: none;
+        border-radius: 0 2px 2px 0;
+        color: #4b4f56;
+        width: 46px;
+        height: 24px;
+    }
+}

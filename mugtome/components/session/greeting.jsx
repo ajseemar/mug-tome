@@ -21,16 +21,70 @@ const YEARS = [...Array(2020).keys()].slice(1920).reverse();
 class Greeting extends React.Component {
     constructor (props) {
         super(props);
+        this.month = "";
+        this.day = "";
+        this.year = "";
+
+        this.populateState();
+    }
+
+    populateState () {
+        this.state = {
+            first_name: "",
+            last_name: "",
+            email: "",
+            date_of_birth: "",
+            gender: "",
+            password: "",
+            email_login: "",
+            password_login: ""
+        }
     }
 
     handleDemoLogin (e) {
         e.preventDefault();
-        console.log('demo');
+        this.props.login({
+            email: "ajseemar@gmail.com",
+            password: "password"
+        });
     }
     
-    handleFormSubmit (e) {
+    handleSignUp (e) {
         e.preventDefault();
-        console.log('new');
+        this.props.signup({
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            password: this.state.password,
+            date_of_birth: this.state.date_of_birth,
+            gender: this.state.gender
+        });
+        this.populateState();
+    }
+    
+    handleLogIn (e) {
+        e.preventDefault();
+        this.props.login({
+            email: this.state.email_login,
+            password: this.state.password_login
+        });
+        this.populateState();
+    }
+
+    handleInput (field) {
+        return e => {
+            this.setState({
+                [field]: e.currentTarget.value
+            });
+            console.log(this.state.date_of_birth);
+        }
+    }
+
+    handleDOBInput (e) {
+        this[e.currentTarget.name] = e.currentTarget.value;
+        this.setState({
+            date_of_birth: `${this.year}-${this.month}-${this.day}`
+        });
     }
 
     render () {
@@ -38,13 +92,19 @@ class Greeting extends React.Component {
             <div id='greeting-container'>
                 <header id='logged-out-header'>
                     <div id="login-form-container">
-                        <span>Mugtome</span>
-                        <form>
-                            <label htmlFor="email">Email</label>
-                            <input id='email' type="text" placeholder="Enter email"/>
-                            <label htmlFor="password">Password</label>
-                            <input id='password' type="password" placeholder="Enter password"/>
-                            <input id='login-button' type="submit" value="Log In"/>
+                        <span>mugtome</span>
+                        <form onSubmit={this.handleLogIn.bind(this)}>
+                            <div className="email-login-container">
+                                <label htmlFor="email">Email</label>
+                                <input id='email' type="text" placeholder="Enter email" onChange={this.handleInput("email_login")} value={this.state.email_login}/>
+                            </div>
+                            <div className="password-login-container">
+                                <label htmlFor="password">Password</label>
+                                <input id='password' type="password" placeholder="Enter password" onChange={this.handleInput("password_login")} value={this.state.password_login}/>
+                            </div>
+                            <div className="login-button-container">
+                                <input id='login-button' type="submit" value="Log In"/>
+                            </div>
                         </form>
                     </div>
                 </header>
@@ -72,33 +132,35 @@ class Greeting extends React.Component {
                             </div>
                         </div>
                         <div id="signup-form-container">
-                            <h1>Create a New Account</h1>
-                            <h5>It's free and always will be</h5>
-                            <form onSubmit={this.handleFormSubmit.bind(this)}>
+                            <div className="signup-greetings">
+                                <h1>Create a New Account</h1>
+                                <h5>It's free and always will be</h5>
+                            </div>
+                            <form onSubmit={this.handleSignUp.bind(this)}>
                                 <div id="name-input-container">
-                                    <input id="fname" type="text" placeholder="First Name"/>
-                                    <input id="lname" type="text" placeholder="Last Name"/>
+                                    <input id="fname" type="text" placeholder="First Name" onChange={this.handleInput("first_name")} value={this.state.first_name}/>
+                                    <input id="lname" type="text" placeholder="Last Name" onChange={this.handleInput("last_name")} value={this.state.last_name}/>
                                 </div>
                                 <div id='email-input-container'>
-                                <input type="email" placeholder="Email"/>
+                                    <input type="email" placeholder="Email" onChange={this.handleInput("email")} value={this.state.email}/>
                                 </div>
                                 <div id='password-input-container'>
-                                <input type="password" placeholder="New Password"/>
+                                    <input type="password" placeholder="New Password" onChange={this.handleInput("password")} value={this.state.password}/>
                                 </div>
                                 <div id="dob-input-container">
                                     <label htmlFor="birthday">Birthday</label>
                                     <div id="dob-selectors">
-                                        <select name="month" required>
+                                        <select id="month" name="month" required onChange={this.handleDOBInput.bind(this)}>
                                             <option value="">Month</option>
                                             {Object.keys(MONTHS).map((mth, idx) => (
                                                 <option key={idx} value={MONTHS[mth]}>{mth}</option>
                                                 ))}
                                         </select>
-                                        <select name="day" required>
+                                        <select id="day" name="day" required onChange={this.handleDOBInput.bind(this)}>
                                             <option value="">Day</option>
                                             {DAYS.map((day, idx) => <option key={idx} value={day < 10 ? `0${day}` : day}>{day}</option>)}
                                         </select>
-                                        <select name="year" required>
+                                        <select id="year" name="year" required onChange={this.handleDOBInput.bind(this)}>
                                             <option value="">Year</option>
                                             {YEARS.map((yr, idx) => <option key={idx} value={yr}>{yr}</option>)}
                                         </select>
@@ -108,11 +170,11 @@ class Greeting extends React.Component {
                                     <label id="gender-input-label" htmlFor="gender-selector">Gender</label>
                                     <div id="gender-selector">
                                         <div>
-                                        <input id='male-gender-selector' type="radio" value="Male"/>
+                                            <input id='male-gender-selector' type="radio" value="Male" onChange={this.handleInput("gender")}/>
                                             <label htmlFor="male-gender-selector">Male</label>
                                         </div>
                                         <div>
-                                        <input id='female-gender-selector' type="radio" value="Female"/>
+                                            <input id='female-gender-selector' type="radio" value="Female" onChange={this.handleInput("gender")}/>
                                             <label htmlFor="female-gender-selector">Female</label>
                                         </div>
                                     </div>
