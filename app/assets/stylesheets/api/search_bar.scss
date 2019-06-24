@@ -6,6 +6,8 @@
 
 .search-bar {
     border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    
     input {
         color: #1d2129;
         height: 18px;

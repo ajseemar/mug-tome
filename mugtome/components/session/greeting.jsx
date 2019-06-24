@@ -76,7 +76,6 @@ class Greeting extends React.Component {
             this.setState({
                 [field]: e.currentTarget.value
             });
-            console.log(this.state.date_of_birth);
         }
     }
 

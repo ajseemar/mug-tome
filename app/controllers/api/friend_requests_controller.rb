@@ -10,7 +10,7 @@ class Api::FriendRequestsController < ApplicationController
 
     def create
         friend = User.find(params[:friend_id])
-        @friend_request = current_user.friend_requests.new(friend: friend)
+        @friend_request = current_user.friend_requests.new(friend_request_params)
 
         if @friend_request.save
             render :show, status: :created, location: @friend_request
@@ -31,5 +31,9 @@ class Api::FriendRequestsController < ApplicationController
 
     def set_friend_request
         @friend_request = FriendRequest.find(params[:id])
+    end
+
+    def friend_request_params
+        params.require(:friend_request).permit(:user_id, :friend_id)
     end
 end

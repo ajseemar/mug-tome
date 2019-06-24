@@ -16,7 +16,6 @@ class SearchBar extends React.Component {
         const nearestSearch = Object.values(this.props.users).filter(user => (
             `${user.first_name} ${user.last_name}`.toLowerCase().includes(this.state.input.toLowerCase())
             ))[0];
-        // debugger;
         this.setState({
             input: ""
         });
@@ -25,7 +24,6 @@ class SearchBar extends React.Component {
     }
 
     renderSearchResults () {
-        // debugger
         const results = Object.values(this.props.users).filter(user => (
             `${user.first_name} ${user.last_name}`.toLowerCase().includes(this.state.input.toLowerCase())
         ));
