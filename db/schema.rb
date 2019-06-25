@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 2019_06_25_174235) do
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type"
     t.bigint "commentable_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -70,9 +72,11 @@ ActiveRecord::Schema.define(version: 2019_06_25_174235) do
   create_table "likes", force: :cascade do |t|
     t.string "likeable_type"
     t.bigint "likeable_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "pictures", force: :cascade do |t|

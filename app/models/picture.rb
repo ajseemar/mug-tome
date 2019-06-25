@@ -15,6 +15,9 @@ class Picture < ApplicationRecord
     belongs_to :album, optional: true
 
     has_one_attached :photo
+
+    has_many :likes, as: :likeable
+    has_many :comments, as: :commentable
 end
 
 

@@ -16,5 +16,7 @@ class Album < ApplicationRecord
 
     has_many :pictures
     
+    has_many :likes, as: :likeable
+    has_many :comments, as: :commentable
 end
 

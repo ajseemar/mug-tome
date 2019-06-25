@@ -37,6 +37,9 @@ class User < ApplicationRecord
     has_many :album_pictures, through: :albums, source: :pictures
     has_many :pictures
 
+    has_many :likes
+    has_many :comments
+
     # has_and_belongs_to_many :friends,
     #   class_name: "User", 
     #   join_table:  :friendships, 
