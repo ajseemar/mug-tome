@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :pictures, only: [:index]
       resources :albums, only: [:index]
     end
+    resources :posts
     resources :friends, only: [:index, :destroy]
     resources :friend_requests, except: [:edit, :show, :new]
     resources :pictures, only: [:show, :create, :destroy]
