@@ -1,14 +1,14 @@
-class Api::FriendShipsController < ApplicationController
+class Api::FriendsController < ApplicationController
   before_action :set_friend, only: :destroy
 
   def index
     @friends = current_user.friends
-    # render :index
+    render :index
   end
 
   def show
     @friends = User.find(params[:user_id]).friends
-    # render :index
+    render :index
   end
 
   def destroy
@@ -23,7 +23,7 @@ class Api::FriendShipsController < ApplicationController
   private
 
   def set_friend
-    @friend = User.find(params[:user_id]).friends.find(params[:id])
+    @friend = current_user.friends.find(params[:id])
   end
 
 end

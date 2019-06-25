@@ -10,7 +10,7 @@
 #
 
 class FriendRequest < ApplicationRecord
-  validate :not_self, :not_friends, :not_pending
+  validate :not_self, :not_friends , :not_pending
 
   belongs_to :user
   belongs_to :friend, class_name: 'User'
@@ -27,7 +27,7 @@ class FriendRequest < ApplicationRecord
   end
 
   def not_pending
-    errors.add(:friend, 'already requested friendship') if friend.pending_friends.include?(user)
+    errors.add(:friend, 'already requested friendship') if user.pending_friends.include?(friend)
   end
 
   def not_self

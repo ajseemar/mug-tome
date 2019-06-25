@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     [window.currentUser.id]: window.currentUser
                 },
                 friendRequests: {
-                    incoming: {},
-                    outgoing: {}
+                    incoming: [],
+                    outgoing: []
                 }
             },
             errors: {

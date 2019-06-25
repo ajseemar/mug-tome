@@ -7,7 +7,7 @@ const FriendRequestsReducer = (state = {}, action) => {
         case RECEIVE_FRIEND_REQUESTS:
             return action.reqs;
         case RECEIVE_FRIEND_REQUEST:
-            return Object.assign({}, state, { [action.req.id]: action.req });
+            return Object.assign({}, state, { outgoing: [...state.outgoing, action.req]});
         case REMOVE_FRIEND_REQUEST:
             const newState = Object.assign({}, state);
             delete newState[action.reqId]

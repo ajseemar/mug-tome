@@ -33,6 +33,10 @@ class User < ApplicationRecord
     has_many :friendships, dependent: :destroy
     has_many :friends, through: :friendships
 
+    has_many :albums
+    has_many :album_pictures, through: :albums, source: :pictures
+    has_many :pictures
+
     # has_and_belongs_to_many :friends,
     #   class_name: "User", 
     #   join_table:  :friendships, 
@@ -64,6 +68,6 @@ class User < ApplicationRecord
     end
 
     def remove_friend(friend)
-        current_user.friends.destroy(friend)
+        self.friends.destroy(friend)
     end
 end

@@ -12,7 +12,7 @@
 class Friendship < ApplicationRecord
     validate :not_self
 
-    after_create :create_relationship
+    # after_create :create_relationship
     after_destroy :destroy_relationship
 
     belongs_to :user

@@ -9,11 +9,11 @@ class Api::FriendRequestsController < ApplicationController
     end
 
     def create
-        friend = User.find(params[:friend_id])
-        @friend_request = current_user.friend_requests.new(friend_request_params)
+        friend = User.find(params[:friend_request][:friend_id])
+        @friend_request = User.find(params[:friend_request][:user_id]).friend_requests.new(friend_request_params)
 
         if @friend_request.save
-            render :show, status: :created, location: @friend_request
+            render :show
         else
             render json: @friend_request.errors, status: :unprocessable_entity
         end
@@ -21,6 +21,7 @@ class Api::FriendRequestsController < ApplicationController
 
     def update
         @friend_request.accept
+        render json: {friends: current_user.friends}
     end
 
     def destroy
