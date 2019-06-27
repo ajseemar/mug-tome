@@ -29,13 +29,16 @@ class SearchBar extends React.Component {
         ));
         if (this.state.input)
         return (
-            <ul>
-                {results.slice(0, 15).map((user) => (
-                    <Link onClick={this.handleSearchSubmit.bind(this)} className='search-result-link-container' key={`${user.first_name} ${user.last_name}`} to={`/users/${user.first_name}/${user.last_name}/${user.id}`}>
-                        <p className='search-result-link'>{`${user.first_name} ${user.last_name}`}</p>
-                    </Link>
-                ))}
-            </ul>
+            <div className="search-results">
+                <ul>
+                    {results.slice(0, 15).map((user) => (
+                        <Link onClick={this.handleSearchSubmit.bind(this)} className='search-result-link-container' key={`${user.first_name} ${user.last_name}`} to={`/users/${user.first_name}/${user.last_name}/${user.id}`}>
+                            {/* <i class="fas fa-search" /> */}
+                            <p className='search-result-link'>{`${user.first_name} ${user.last_name}`}</p>
+                        </Link>
+                    ))}
+                </ul>
+            </div>
         )
     }
 
@@ -49,9 +52,7 @@ class SearchBar extends React.Component {
                         <i className="fas fa-search"></i>
                     </button>
                 </div>
-                <div className="search-results">
-                    {this.renderSearchResults()}
-                </div>
+                {this.renderSearchResults()}
             </div>
         )
     }
