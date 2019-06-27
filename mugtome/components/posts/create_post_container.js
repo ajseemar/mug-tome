@@ -1,10 +1,21 @@
 import { connect } from 'react-redux';
-import CreatePostWidget from './create_post';
+import { withRouter } from 'react-router-dom';
 
-const msp = state => ({
+import CreatePostWidget from './create_post';
+import { createPost } from '../../actions/post_actions';
+
+const msp = (state, ownProps) => ({
+    post: {
+        body: "",
+        friend_id: ownProps.match.params.id
+    },
     currentUser: state.entities.users[state.session.id]
 });
 
-const CreatePostWidgetContainer = connect(msp, null)(CreatePostWidget);
+const mdp = dispatch => ({
+    createPost: (post) => dispatch(createPost(post))
+});
+
+const CreatePostWidgetContainer = withRouter(connect(msp, mdp)(CreatePostWidget));
 
 export default CreatePostWidgetContainer;
