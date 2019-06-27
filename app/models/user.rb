@@ -33,6 +33,12 @@ class User < ApplicationRecord
     has_many :friendships, dependent: :destroy
     has_many :friends, through: :friendships
 
+    has_many :posts
+    has_many :posts_to_feed,
+    primary_key: :id,
+    foreign_key: :friend_id,
+    class_name: :Post
+
     has_many :albums
     has_many :album_pictures, through: :albums, source: :pictures
     has_many :pictures

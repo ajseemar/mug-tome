@@ -5,12 +5,13 @@ import CreatePostWidgetContainer from '../posts/create_post_container';
 // import LoginFormContainer from '../session_form/login_form_container';
 // import SignupFormContainer from '../session_form/signup_form_container';
 
-function Modal({ modal, closeModal }) {
+function Modal(props) {
+    const { modal, closeModal } = props;
     if (!modal) {
         return null;
     }
     let component;
-    switch (modal) {
+    switch (modal.component) {
         // case 'login':
         //     component = <LoginFormContainer />;
         //     break;
@@ -21,7 +22,7 @@ function Modal({ modal, closeModal }) {
             // debugger
             component = (
                 <div className="create-post-modal-container">
-                    <CreatePostWidgetContainer />
+                    <CreatePostWidgetContainer id={modal.id}/>
                 </div>
             );
             break;

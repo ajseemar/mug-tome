@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 
-import { RECEIVE_POSTS, RECEIVE_POST, REMOVE_POST } from "../../actions/posts";
+import { RECEIVE_POSTS, RECEIVE_POST, REMOVE_POST } from "../../actions/post_actions";
 
 const PostsReducer = (state = {}, action) => {
     Object.freeze(state);

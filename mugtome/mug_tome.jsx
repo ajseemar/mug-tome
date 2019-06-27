@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 friendRequests: {
                     incoming: [],
                     outgoing: []
-                }
+                },
+                posts: {}
             },
             errors: {
                 session: []

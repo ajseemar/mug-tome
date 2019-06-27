@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import UsersReducer from './users_reducer';
 import FriendRequestsReducer from './friend_requests_reducer';
+import PostsReducer from './posts_reducer';
 
 export default combineReducers({
     users: UsersReducer,
-    friendRequests: FriendRequestsReducer
+    friendRequests: FriendRequestsReducer,
+    posts: PostsReducer
 });
