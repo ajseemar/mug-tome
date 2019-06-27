@@ -1,3 +1,164 @@
 // Place all the styles related to the api/friends controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#find-friends-page-container {
+    background-color: #E9EBEE;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+}
+
+#find-friends-page {
+    width: 50%;
+    margin-left: 25%;
+}
+
+.friend-requests-container {
+    width: 665px;
+    background-color: white;
+    margin: 20px 0px;
+
+    
+}
+#request-title-header {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.5;
+        padding-top: 15px;
+        padding-left: 15px;
+    }
+#friend-request-toggle {
+    border: none;
+    background-color: #fff;
+    padding: 5px 10px 15px 15px;
+    font-size: 11px;
+    color:  #385898;
+    // padding: 0px;
+    // display: inline-block;
+}
+
+#potential-friends-container {
+    background-color: #fff;
+    width: 665px;
+    hr {
+        margin-top: 10px;
+        border: 1px solid lightgrey;
+    }
+}
+
+.potential-friend-request-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+
+    .user-info-container {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+
+        p {
+            padding-left: 15px;
+            font-size: 16px;
+            color: #385898;
+            font-weight: bold;
+        }
+    }
+
+    .user-request-actions {
+        padding-right: 15px;
+        
+        button {
+            margin: 2px;
+            line-height: 22px;
+            font-size: 12px;
+            font-weight: bold;
+            border: none;
+        }
+
+        #add-friend-action-button {
+            background-color: #4267b2;
+            border: 1px solid #4267b2;
+            color: #fff;
+        }
+
+        #remove-friend-action-button {
+            background-color: #f5f6f7;
+            border: 1px solid #ccd0d5;
+            color: #4b4f56;
+        }
+    }
+}
+
+.outgoing-requests {
+    // padding: 15px 15px 0px 15px;
+}
+
+.outgoing-request {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 15px;
+    padding: 15px 0px;
+    border-bottom: 1px solid lightgrey;
+
+    .outgoing-request-user-info {
+        font-size: 16px;
+        color: #385898;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+
+        p {
+            margin-left: 10px;
+        }
+    }
+
+    button {
+        background-color: #f5f6f7;
+        border: 1px solid #ccd0d5;
+        color: #4b4f56;
+        height: 75%;
+        padding: 5px 10px;
+        margin: 0px 10px;
+    }
+
+    .incoming-request-actions {
+        // padding-right: 15px;
+
+        button {
+            margin: 2px;
+            border-radius: 1px;
+            font-size: 12px;
+            font-weight: bold;
+
+            i {
+                margin-right: 5px;
+            }
+        }
+
+        #accept-friend-action-button {
+            background-color: #4267b2;
+            border: 1px solid #4267b2;
+            color: #fff;
+        }
+        
+        #reject-friend-action-button {
+            background-color: #f5f6f7;
+            border: 1px solid #ccd0d5;
+            color: #4b4f56;
+        }
+    }
+}
+
+#delete-friend-request {
+    margin: 2px;
+    border-radius: 1px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f6f7;
+    border: 1px solid #ccd0d5;
+    color: #4b4f56;
+}
