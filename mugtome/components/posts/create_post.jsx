@@ -7,8 +7,6 @@ class CreatePostWidget extends React.Component {
         setTimeout(function () {
             document.getElementsByClassName("create-post-input")[0].focus();
         }, 0);
-
-        // debugger
     }
 
     handleInput(field) {
@@ -22,7 +20,6 @@ class CreatePostWidget extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // debugger
         this.props.createPost(this.state);
         this.setState(this.props.post);
         this.props.closeModal();

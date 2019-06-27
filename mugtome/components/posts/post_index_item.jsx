@@ -94,7 +94,7 @@ class PostIndexItem extends React.Component {
 
                 <header>
                     {/* <img className='poster-avatar' src={this.props.postOwner.avatar} alt="Avatar" /> */}
-                    <i className='fas fa-user-circle' style={{fontSize: 28}}></i>
+                    <i className='fas fa-user-circle' style={{fontSize: 32}}></i>
                     <div className='subheader-container'>
                         <div>
                             {this.renderName(this.props)}
