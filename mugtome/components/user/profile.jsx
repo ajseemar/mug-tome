@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import NavbarContainer from '../navbar/navbar_container';
+import Footer from '../widgets/footer';
 
 class Profile extends React.Component {
     constructor (props) {
@@ -32,34 +33,51 @@ class Profile extends React.Component {
                     </header>
                     <main className='profile-main-content'>
                         <div className="widgets-container">
-                            <div className="language-widget-container">
-                                <ul className="language-widget">
-                                    <li className="language-widget-item">English (US)</li>
-                                    <li className="language-widget-item">.</li>
-                                    <li className="language-widget-item">Español</li>
-                                    <li className="language-widget-item">.</li>
-                                    <li className="language-widget-item">Português (Brasil)</li>
-                                    <li className="language-widget-item">.</li>
-                                    <li className="language-widget-item">Français (France)</li>
-                                    <li className="language-widget-item">.</li>
-                                    <li className="language-widget-item">Deutsch</li>
-                                </ul>
+                            <Footer />
+                        </div>
+                        <div className="timeline-main-content">
+                            <div className="create-post-normal-container" onClick={() => this.props.openModal('create_post')}>
+                                <div className="create-post-widget">
+                                    <div className="modal-header-container">
+                                        <i className="fas fa-pencil-alt"></i>
+                                        <h3 className="modal-header">Create Post</h3>
+                                    </div>
+                                    <div className="modal-form-container">
+                                        <div className="modal-avatar-container">
+                                            <i style={{ color: "blue", fontSize: 36 }} className="fas fa-user-circle" />
+                                        </div>
+                                        <form>
+                                            <textarea className='create-post-input' placeholder={`What's on your mind ${this.props.currentUser.first_name} ${this.props.currentUser.last_name}`}></textarea>
+                                        </form>
+                                    </div>
+                                    <div className="create-post-modal-break"></div>
+
+                                    <div className="post-actions-container">
+                                        <div className="post-action">
+                                            <img src={window.addPhotoImgUrl} />
+                                            <p>Add Photo/Video</p>
+                                        </div>
+                                        <div className="post-action">
+                                            <img src={window.addTagImgUrl} />
+                                            <p>Tag Friends</p>
+                                        </div>
+                                        <div className="post-action">
+                                            <img src={window.addReactionImgUrl} />
+                                            <p>Feelings/Activities</p>
+                                        </div>
+                                        <div className="post-action">...</div>
+                                        <div className="post-viewer-settings">
+                                            {/* <div className="post-destination-setting-container">
+
+                                            </div>
+                                            <div className="post-recipient-setting-container">
+
+                                            </div> */}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="widget-footer-container">
-                                <ul className="widget-footer">
-                                    <li className="widget-footer-item">Privacy</li>
-                                    <li className="widget-footer-item">.</li>
-                                    <li className="widget-footer-item">Terms</li>
-                                    <li className="widget-footer-item">.</li>
-                                    <li className="widget-footer-item">Advertising</li>
-                                    <li className="widget-footer-item">.</li>
-                                    <li className="widget-footer-item">Ad Choices</li>
-                                    <li className="widget-footer-item">.</li>
-                                    <li className="widget-footer-item">Cookies</li>
-                                    <li className="widget-footer-item">.</li>
-                                    <li className="widget-footer-item">More</li>
-                                </ul>
-                            </div>
+                            <div className="modal-background" style={{display: 'none'}}></div>
                         </div>
                     </main>
                 </div>

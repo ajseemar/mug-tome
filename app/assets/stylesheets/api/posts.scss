@@ -1,3 +1,120 @@
 // Place all the styles related to the api/posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$FB_BLUE: #4267b2;
+
+.create-post-widget {
+    background-color: #fff;
+}
+.modal-header-container {
+    display: flex;
+    // justify-content: space-between;
+    background: #F4F4F4;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+
+    i {
+        // padding: 0px 8px;
+        margin-left: 10px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    
+    h3 {
+        padding: 7.5px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
+
+.modal-form-container {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    overflow: contain;
+    align-content: center;
+
+    .modal-avatar-container {
+        border-radius: 50%;
+        overflow: hidden;
+        height: 35px;
+        width: 35px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    form {
+        width: 75%;
+
+        .create-post-input {
+            width: 80%;
+            outline-width: 0;
+            overflow: hidden;
+            border: none;
+            resize: none;
+            padding-top: 15px;
+            font-size: 12px;
+        }
+    }
+}
+
+.post-actions-container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    margin: 5px;
+
+    .post-action {
+        background: #F4F4F4;
+        border-radius: 25px;
+        padding: 5px 10px 5px 10px;
+        border: none;
+        margin-right: 5px;
+        font-size: 10px;
+        font-weight: bold;
+        color: #666;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+            height: 20px;
+            width: 20px;
+            margin-right: 5px;
+        }
+    }
+}
+
+.create-post-modal-break {
+    width: 92.5%;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.post-modal-share-button-container {
+    display: flex;
+    justify-content: center;
+    .post-modal-share-button {
+        background-color: saturate(lighten($FB_BLUE, 10%), 25%);
+        font-weight: 600;
+        font-family: 'Maven Pro', sans-serif;
+        border: none;
+        width: 90%;
+        padding: 5px;
+        border-radius: 10px;
+        margin: 10px 0px;
+        color: white;
+        // font-size: 10px;
+    }
+    .post-modal-share-button:hover {
+        background-color: $FB_BLUE;
+    }
+}
+
+.create-post-modal-container {
+    width: 550px;
+    height: 150px;
+}
