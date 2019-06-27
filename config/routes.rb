@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resource :session, only: [:create, :destroy]
     resources :users, only: [:index, :create, :show] do
-      resources :friends, only: [:show]
+      resources :friends, only: [:index]
       resources :pictures, only: [:index]
       resources :albums, only: [:index]
     end
     
-    resources :friends, only: [:index, :destroy]
+    resources :friends, only: [:destroy]
     resources :friend_requests, except: [:edit, :show, :new]
     
     resources :posts do

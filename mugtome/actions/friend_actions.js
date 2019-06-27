@@ -1,40 +1,22 @@
-import  * as FriendAPI from '../utils/friend_api';
+export const RECEIVE_FRIENDS = "RECEIVE_FRIENDS";
+export const REMOVE_FRIEND = "REMOVE_FRIEND";
 
-export const RECEIVE_FRIEND_REQUESTS = "RECEIVE_FRIEND_REQUESTS";
-export const RECEIVE_FRIEND_REQUEST = "RECEIVE_FRIEND_REQUEST";
-export const REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
-
-const receiveFriendRequests = reqs => ({
-    type: RECEIVE_FRIEND_REQUESTS,
-    reqs
+const fetchFriends = friends => ({
+    type: RECEIVE_FRIENDS,
+    friends
 });
 
-const receiveFriendRequest = req => ({
-    type: RECEIVE_FRIEND_REQUEST,
-    req
+const deleteFriend = friend => ({
+    type: REMOVE_FRIEND,
+    friend_id: friend.id
 });
 
-const removeFriendRequest = reqId => ({
-    type: REMOVE_FRIEND_REQUEST,
-    reqId
-});
-
-export const fetchFriendRequests = () => dispatch => (
-    FriendAPI.fetchFriendRequests()
-        .then((reqs) => dispatch(receiveFriendRequests(reqs)))
+export const requestFriends = (user_id) => dispatch => (
+    FriendAPI.requestFriends(user_id)
+        .then((friends) => dispatch(fetchFriends(friends)))
 );
 
-export const createFriendRequest = (req) => dispatch => (
-    FriendAPI.createFriendRequest(req)
-        .then((req) => dispatch(receiveFriendRequest(req)))
-);
-
-export const acceptFriendRequest = (req) => dispatch => (
-    FriendAPI.acceptFriendRequest(req)
-        .then((req) => dispatch(receiveFriendRequest(req)))
-);
-
-export const deleteFriendRequest = (reqId) => dispatch => (
-    FriendAPI.deleteFriendRequest(reqId)
-        .then((reqId) => dispatch(removeFriendRequest(reqId)))
+export const removeFriend = (id) => dispatch => (
+    FriendAPI.removeFriend(id)
+        .then((friend) => dispatch(deleteFriend(friend)))
 );

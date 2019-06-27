@@ -40,11 +40,13 @@ class FindFriends extends React.Component {
 
     checkForRequests (field) {
         if (field === "incoming") {
-            if (Object.keys(this.props.friendRequests.incoming).length === 0) {
+            // debugger
+            if (this.props.friendRequests.incoming.length === 0) {
                 return <p id='request-title-header'>No New Friend Requests</p>
             } else this.renderFriendRequests()
         } else {
-            if (Object.keys(this.props.friendRequests.outgoing).length === 0) {
+            // debugger
+            if (this.props.friendRequests.outgoing.length === 0) {
                 return <p id='request-title-header'>No Pending Friend Requests</p>
             } else this.renderFriendRequests()
         }
@@ -74,6 +76,16 @@ class FindFriends extends React.Component {
         // window.location.reload();
     }
 
+    renderIncomingRequestLink(req) {
+        if (!this.props.users[req.user_id]) return null;
+        return (
+            <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.user_id].first_name}/${this.props.users[req.user_id].last_name}/${this.props.users[req.user_id].id}`}>
+                <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
+                <p>{`${this.props.users[req.user_id].first_name} ${this.props.users[req.user_id].last_name}`}</p>
+            </Link>
+        )
+    }
+
     renderIncomingRequests () {
         if (Object.values(this.props.friendRequests.incoming).length > 0 && Object.values(this.props.users).length > 0)
         return (
@@ -82,10 +94,11 @@ class FindFriends extends React.Component {
                 Object.values(this.props.friendRequests.incoming).map(req => (
                     <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
                         {/* <p>{`${this.props.users[req.user_id].first_name} ${this.props.users[req.user_id].last_name}`}</p> */}
-                        <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.user_id].first_name}/${this.props.users[req.user_id].last_name}/${this.props.users[req.user_id].id}`}>
+                        {/* <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.user_id].first_name}/${this.props.users[req.user_id].last_name}/${this.props.users[req.user_id].id}`}>
                             <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
                             <p>{`${this.props.users[req.user_id].first_name} ${this.props.users[req.user_id].last_name}`}</p>
-                        </Link>
+                        </Link> */}
+                        {this.renderIncomingRequestLink(req)}
                         {/* <button onClick={() => this.acceptFriend(req)}>Accept</button>
                         <button onClick={() => this.rejectFriend(req.id)}>Reject</button> */}
                         <div className="incoming-request-actions">
@@ -99,16 +112,23 @@ class FindFriends extends React.Component {
         )
     }
 
+    renderOutgoingRequestLink (req) {
+        if (!this.props.users[req.friend_id]) return null;
+        return (
+            <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.friend_id].first_name}/${this.props.users[req.friend_id].last_name}/${this.props.users[req.friend_id].id}`}>
+                <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
+                <p>{`${this.props.users[req.friend_id].first_name} ${this.props.users[req.friend_id].last_name}`}</p>
+            </Link>
+        )
+    }
+
     renderOutgoingRequests () {
         if (Object.values(this.props.friendRequests.outgoing).length > 0 && Object.values(this.props.users).length > 0)
         return (
             <div className="outgoing-requests">
                 {Object.values(this.props.friendRequests.outgoing).map(req => (
                     <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
-                        <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.friend_id].first_name}/${this.props.users[req.friend_id].last_name}/${this.props.users[req.friend_id].id}`}>
-                            <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
-                            <p>{`${this.props.users[req.friend_id].first_name} ${this.props.users[req.friend_id].last_name}`}</p>
-                        </Link>
+                        {this.renderOutgoingRequestLink(req)}
                         <button id='delete-friend-request' onClick={this.rejectFriend.bind(this,req.id)}>Unsend</button>
                     </div>
                 ))}

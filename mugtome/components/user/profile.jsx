@@ -69,14 +69,6 @@ class Profile extends React.Component {
                             <p>Feelings/Activities</p>
                         </div>
                         <div className="post-action">...</div>
-                        <div className="post-viewer-settings">
-                            {/* <div className="post-destination-setting-container">
-
-                                            </div>
-                                            <div className="post-recipient-setting-container">
-
-                                            </div> */}
-                        </div>
                     </div>
                 </div>
             </div>

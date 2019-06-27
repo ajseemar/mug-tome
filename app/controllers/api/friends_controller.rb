@@ -2,14 +2,15 @@ class Api::FriendsController < ApplicationController
   before_action :set_friend, only: :destroy
 
   def index
-    @friends = current_user.friends
-    render :index
-  end
-
-  def show
+    # @friends = current_user.friends
     @friends = User.find(params[:user_id]).friends
     render :index
   end
+
+  # def show
+  #   @friends = User.find(params[:user_id]).friends
+  #   render :index
+  # end
 
   def destroy
     if @friend

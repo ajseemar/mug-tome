@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import FindFriends from './find_friends';
-import { fetchFriendRequests, createFriendRequest, acceptFriendRequest, deleteFriendRequest } from '../../actions/friend_actions';
+import { fetchFriendRequests, createFriendRequest, acceptFriendRequest, deleteFriendRequest } from '../../actions/friend_request_actions';
 
 const msp = state => ({
     currentUser: state.entities.users[state.session.id],
