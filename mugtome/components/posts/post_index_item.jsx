@@ -15,10 +15,14 @@ const MONTHS = Object.freeze([
 class PostIndexItem extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            liked: false
+        }
     }
     componentDidMount() {
         // debugger
         this.props.requestComments({ commentable_type: 'posts', commentable_id: this.props.post.id });
+        this.props.requestLikes({ likeable_type: 'posts', likeable_id: this.props.post.id })
         if (!this.props.postOwner) this.props.requestUser(this.props.post.user_id);
     }
 
@@ -117,6 +121,25 @@ class PostIndexItem extends React.Component {
         );// <CommentIndexContainer commentIds={this.props.post.commentIds}/>
     }
 
+    createLike() {
+        if (this.state.liked) {
+            this.props.deleteLike();
+        }
+        else {
+            const params = {
+                likeable_type: 'posts',
+                likeable_id: this.props.post.id,
+                like: {
+                    likeable_type: 'Post',
+                    likeable_id: this.props.post.id
+                }
+            };
+            this.props.createLike(params);
+            // window.location.reload()
+            this.setState({ liked: true })
+        }
+    }
+
     render() {
         if (this.props.postOwner === undefined) return null;
         return (
@@ -150,7 +173,7 @@ class PostIndexItem extends React.Component {
                     <hr style={{ margin: 0 }} />
 
                     <div className="post-actions-container">
-                        <button /* onClick={this.props.createLike({user_id: user.id, })} */ style={this.props.post.likeIds.length > 0 ? { color: 'teal' } : {}} >
+                        <button onClick={this.createLike.bind(this)} style={this.props.post.likeIds.length > 0 ? { color: 'teal' } : {}} >
                             <i style={this.props.post.likeIds.length > 0 ? { color: 'teal' } : {}} className="far fa-thumbs-up"></i>
                             Like
                         </button>

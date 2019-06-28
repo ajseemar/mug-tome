@@ -10,7 +10,7 @@ import { selectComments } from '../../reducers/selectors';
 // import PostIndexItem from './post_index_item';
 // import { requestUser } from '../../actions/users';
 // import { deletePost } from '../../actions/posts';
-// import { createLike } from '../../actions/likes';
+import { createLike, requestLikes, deleteLike } from '../../actions/like_actions';
 
 const msp = (state, ownProps) => {
     let timelineOwner = null;
@@ -20,15 +20,18 @@ const msp = (state, ownProps) => {
         user: state.entities.users[state.session.id],
         timelineOwner,
         comments: state.entities.comments,
-        users: state.entities.users
+        users: state.entities.users,
+        likes: state.entities.likes
     });
 };
 
 const mdp = dispatch => ({
     requestUser: id => dispatch(requestUser(id)),
     deletePost: id => dispatch(deletePost(id)),
-    requestComments: params => dispatch(requestComments(params))
-    // createLike: like => dispatch(createLike(like))
+    requestComments: params => dispatch(requestComments(params)),
+    createLike: params => dispatch(createLike(params)),
+    requestLikes: params => dispatch(requestLikes(params)),
+    deleteLike: id => dispatch(deleteLike(id))
 });
 
 const PostIndexItemContainer = withRouter(connect(msp, mdp)(PostIndexItem));

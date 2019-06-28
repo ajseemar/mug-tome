@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     incoming: [],
                     outgoing: []
                 },
-                posts: {}
+                posts: {},
+                comments: {},
+                likes: {}
             },
             errors: {
                 session: []
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.getState = store.getState;
     window.dispatch = store.dispatch;
-    
+
     // -----------------------------------------------------------------------
 
 

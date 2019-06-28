@@ -13,6 +13,10 @@ json.friendIds do
     json.array! user.friends.map { |friend| friend.id }
 end
 
+json.likeIds do 
+    json.array! user.likes.map { |like| like.id }
+end
+
 json.feedPostIds do 
     json.array! user.posts_to_feed.order(created_at: :desc).map { |post| post.id }
 end
