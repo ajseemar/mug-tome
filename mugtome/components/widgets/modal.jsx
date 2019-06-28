@@ -32,8 +32,13 @@ function Modal(props) {
             // component = <h1>Create Post Form should go here bro</h1>;
             // break;
     }
+    // const closeModal = 
+    const update = (e) => {
+        e.stopPropagation();
+        closeModal()
+    }
     return (
-        <div className="modal-background" onClick={closeModal}>
+        <div className="modal-background" onClick={update}>
             <div className="modal-child" onClick={e => e.stopPropagation()}>
                 {component}
             </div>

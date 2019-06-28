@@ -5,11 +5,12 @@ import { openModal } from '../../actions/modal_actions';
 import { requestUser } from '../../actions/user_actions';
 
 const msp = state => ({
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
 });
 
 const mdp = dispatch => ({
     openModal: component => dispatch(openModal(component)),
+    closeModal: () => dispatch(closeModal()),
     requestUser: (id) => dispatch(requestUser(id))
 });
 

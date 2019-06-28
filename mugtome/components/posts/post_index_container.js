@@ -6,7 +6,8 @@ import PostIndex from './post_index';
 
 const msp = (state, ownProps) => ({
     user: state.entities.users[ownProps.user_id],
-    posts: selectPosts(state.entities.posts, state.entities.users[ownProps.user_id])
+    posts: selectPosts(state.entities.posts, state.entities.users[ownProps.user_id]),
+    modal: state.ui.modal
 });
 
 const mdp = dispatch => ({

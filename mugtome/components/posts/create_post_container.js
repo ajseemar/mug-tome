@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import CreatePostWidget from './create_post';
-import { createPost } from '../../actions/post_actions';
+import { createPost, requestPosts } from '../../actions/post_actions';
 import { closeModal } from '../../actions/modal_actions';
 
 const msp = (state, ownProps) => ({
@@ -16,7 +16,8 @@ const msp = (state, ownProps) => ({
 
 const mdp = dispatch => ({
     createPost: (post) => dispatch(createPost(post)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
+    requestPosts: () => dispatch(requestPosts())
 });
 
 const CreatePostWidgetContainer = withRouter(connect(msp, mdp)(CreatePostWidget));

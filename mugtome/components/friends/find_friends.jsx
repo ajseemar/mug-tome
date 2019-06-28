@@ -14,17 +14,13 @@ class FindFriends extends React.Component {
     }
     
     populateState () {
-        // let incoming, outgoing;
-
         const { users, currentUser } = this.props;
         const incoming = this.props.friendRequests.incoming.map(req => req.user_id);
         const outgoing = this.props.friendRequests.outgoing.map(req => req.friend_id)
-        // debugger
         let candidates = Object.values(users).filter(user => (
             !currentUser.friendIds.includes(user.id) && user.id !== currentUser.id &&
             !incoming.includes(user.id) && !outgoing.includes(user.id)
         ));
-        // if (inc)
         candidates.forEach(user => this.state.users[user.id] = user);
     }
     
@@ -40,40 +36,27 @@ class FindFriends extends React.Component {
 
     checkForRequests (field) {
         if (field === "incoming") {
-            // debugger
             if (this.props.friendRequests.incoming.length === 0) {
                 return <p id='request-title-header'>No New Friend Requests</p>
             } else this.renderFriendRequests()
         } else {
-            // debugger
             if (this.props.friendRequests.outgoing.length === 0) {
                 return <p id='request-title-header'>No Pending Friend Requests</p>
             } else this.renderFriendRequests()
         }
     }
 
-    // updateState (id) {
-    //     const newState = Object.assign({}, this.state.users);
-    //     delete newState[id];
-    //     this.setState({ users: newState });
-    // }
-
     addFriend (id) {
         this.props.createFriendRequest({ friend_request: { user_id: this.props.currentUser.id, friend_id: id } });
-        // this.updateState(id);
-        // window.location.reload();
     }
 
     acceptFriend (req) {
         this.props.acceptFriendRequest(req)
-        // this.updateState(id);
-        // window.location.reload();
     }
 
     rejectFriend (id) {
         this.props.deleteFriendRequest(id);
         this.updateState(id);
-        // window.location.reload();
     }
 
     renderIncomingRequestLink(req) {
@@ -93,14 +76,7 @@ class FindFriends extends React.Component {
             {
                 Object.values(this.props.friendRequests.incoming).map(req => (
                     <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
-                        {/* <p>{`${this.props.users[req.user_id].first_name} ${this.props.users[req.user_id].last_name}`}</p> */}
-                        {/* <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.user_id].first_name}/${this.props.users[req.user_id].last_name}/${this.props.users[req.user_id].id}`}>
-                            <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
-                            <p>{`${this.props.users[req.user_id].first_name} ${this.props.users[req.user_id].last_name}`}</p>
-                        </Link> */}
                         {this.renderIncomingRequestLink(req)}
-                        {/* <button onClick={() => this.acceptFriend(req)}>Accept</button>
-                        <button onClick={() => this.rejectFriend(req.id)}>Reject</button> */}
                         <div className="incoming-request-actions">
                             <button id='accept-friend-action-button' onClick={() => this.acceptFriend(req)}><i className="fas fa-user-plus"></i>Accept</button>
                             <button id='reject-friend-action-button' onClick={() => this.rejectFriend(req.id)}>Reject</button>
@@ -137,25 +113,14 @@ class FindFriends extends React.Component {
     }
 
     renderFriendRequests () {
-        // debugger
         if (this.state.incoming) return (
             <div className="incoming-requests-container">
-                {/* <p>Rendering incoming friend requests</p> */}
                 {this.renderIncomingRequests()}
-
-                {/* <button id='friend-request-toggle' onClick={() => this.setState({
-                    incoming: !this.state.incoming
-                })}>{this.state.incoming ? "View Sent Requests" : "View Received Requests"}</button> */}
             </div>
         ); 
         else return (
             <div className="outgoing-requests-container">
-                {/* <p>Rendering outgoing friend requests like a thirsty bitch</p> */}
                 {this.renderOutgoingRequests()}
-
-                {/* <button id='friend-request-toggle' onClick={() => this.setState({
-                    incoming: !this.state.incoming
-                })}>{this.state.incoming ? "View Sent Requests" : "View Received Requests"}</button> */}
             </div>
         );
     }
@@ -190,7 +155,6 @@ class FindFriends extends React.Component {
             <div id="find-friends-page-container">
                 <NavbarContainer />
                 <div id="find-friends-page">
-                    {/* Friend Request Component */}
                     <div className="friend-requests-container">
                         {this.state.incoming ? this.checkForRequests('incoming') : this.checkForRequests()}
                         {this.renderFriendRequests()}

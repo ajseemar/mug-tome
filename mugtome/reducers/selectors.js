@@ -7,3 +7,11 @@ export const selectPosts = (posts, user) => {
     });
     return output;
 };
+
+export const selectComments = (comments, post) => {
+    const output = [];
+    post.commentIds.forEach(id => {
+        if (comments[id]) output.push(comments[id]);
+    });
+    return output
+};

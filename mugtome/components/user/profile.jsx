@@ -5,6 +5,9 @@ import NavbarContainer from '../navbar/navbar_container';
 import Footer from '../widgets/footer';
 import PostIndexContainer from '../posts/post_index_container';
 
+import Modal from '../widgets/modal';
+
+
 class Profile extends React.Component {
     constructor (props) {
         super(props);
@@ -40,6 +43,7 @@ class Profile extends React.Component {
     renderPostInputContainer () {
         return (
             <div className="create-post-normal-container" onClick={() => this.props.openModal({ component: 'create_post', id: this.props.match.params.id })}>
+                <Modal />
                 <div className="create-post-widget">
                     <div className="modal-header-container">
                         <i className="fas fa-pencil-alt"></i>

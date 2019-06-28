@@ -12,12 +12,9 @@ class PostIndex extends React.Component {
         this.props.requestPosts();
     }
 
-    // componentDidUpdate(prevProps) {
-    //     console.log(this.props.posts, prevProps.posts);
-    //     if (this.props.posts && prevProps.posts && prevProps.posts.length !== this.props.posts.length) {
-    //         this.props.requestPosts();
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.modal && this.props.modal === null) window.location.reload();
+    }
 
     renderPosts () {
         if (this.props.posts && this.props.posts.length > 0)

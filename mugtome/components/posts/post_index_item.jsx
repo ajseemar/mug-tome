@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, Redirect } from 'react-router-dom';
 
-// import CreateCommentContainer from '../comments/create_comment_container';
+import CreateCommentContainer from '../comments/create_comment_container';
+import CommentIndexContainer from '../comments/comment_index_container';
+import CommentIndex from '../comments/comment_index';
 
 const MONTHS = Object.freeze([
     "January", "February", "March", "April",
@@ -11,8 +13,12 @@ const MONTHS = Object.freeze([
 ]);
 
 class PostIndexItem extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     componentDidMount() {
         // debugger
+        this.props.requestComments({ commentable_type: 'posts', commentable_id: this.props.post.id });
         if (!this.props.postOwner) this.props.requestUser(this.props.post.user_id);
     }
 
@@ -86,6 +92,31 @@ class PostIndexItem extends React.Component {
             return <div id="comment_counter">{this.props.post.commentIds.length}</div>
     }
 
+    renderComments() {
+        if (this.props.post.commentIds.length > 0 && Object.values(this.props.comments).length > 0) return (
+            // <CommentIndexContainer comments={this.props.comments} commentIds={this.props.post.commentIds} />
+            <div className="comments-container">
+                {this.props.post.commentIds.map(id => (
+                    <div key={id} className="comment-container">
+                        <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
+                        <div className='comment-main'>
+                            <div className="comment-body">
+                                <div className="idekanymore">
+                                    <Link className="comment-owner" to={`/users/${this.props.postOwner.first_name}/${this.props.postOwner.last_name}/${this.props.postOwner.id}`}>
+                                        <h2 className='name'>{`${this.props.users[this.props.comments[id].user_id].first_name} ${this.props.users[this.props.comments[id].user_id].last_name}`}</h2>
+                                    </Link>
+                                    <div className='comment'>
+                                        {this.props.comments[id].body}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );// <CommentIndexContainer commentIds={this.props.post.commentIds}/>
+    }
+
     render() {
         if (this.props.postOwner === undefined) return null;
         return (
@@ -94,7 +125,7 @@ class PostIndexItem extends React.Component {
 
                 <header>
                     {/* <img className='poster-avatar' src={this.props.postOwner.avatar} alt="Avatar" /> */}
-                    <i className='fas fa-user-circle' style={{fontSize: 32}}></i>
+                    <i className='fas fa-user-circle' style={{ fontSize: 32 }}></i>
                     <div className='subheader-container'>
                         <div>
                             {this.renderName(this.props)}
@@ -113,7 +144,7 @@ class PostIndexItem extends React.Component {
                 <footer>
                     <div id="counters">
                         {this.renderLikeCounter()}
-                        <div id="comment_counter">{0} comments</div>
+                        <div id="comment_counter">{this.props.post.commentIds.length} comments</div>
                     </div>
 
                     <hr style={{ margin: 0 }} />
@@ -133,7 +164,8 @@ class PostIndexItem extends React.Component {
                     <div style={{ display: "block" }}>
                         <hr style={{ marginTop: 0 }} />
                     </div>
-                    {/* <CreateCommentContainer type="post" typeId={this.props.post.id} /> */}
+                    {this.renderComments()}
+                    <CreateCommentContainer type="Post" typeId={this.props.post.id} />
                 </footer>
 
             </div>

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { requestUser } from '../../actions/user_actions';
 
 import PostIndexItem from './post_index_item';
+import { requestComments } from '../../actions/comment_actions';
+import { selectComments } from '../../reducers/selectors';
 
 // import PostIndexItem from './post_index_item';
 // import { requestUser } from '../../actions/users';
@@ -16,13 +18,16 @@ const msp = (state, ownProps) => {
     return ({
         postOwner: state.entities.users[ownProps.post.user_id],
         user: state.entities.users[state.session.id],
-        timelineOwner
+        timelineOwner,
+        comments: state.entities.comments,
+        users: state.entities.users
     });
 };
 
 const mdp = dispatch => ({
     requestUser: id => dispatch(requestUser(id)),
     deletePost: id => dispatch(deletePost(id)),
+    requestComments: params => dispatch(requestComments(params))
     // createLike: like => dispatch(createLike(like))
 });
 

@@ -14,7 +14,7 @@ const App = () => (
     <div id='app-container'>
         {/* <Route path="/" component={ GreetingContainer } /> */}
         {/* <ProtectedRoute path="/users" component={NavbarContainer} /> */}
-        <Modal />
+        {/* <Modal /> */}
         <Switch>
             <AuthRoute exact path="/" component={GreetingContainer} />
             <ProtectedRoute path="/users/:user_fn/:user_ln/:id" component={ProfileContainer} />
