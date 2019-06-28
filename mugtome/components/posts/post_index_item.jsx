@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import CreateCommentContainer from '../comments/create_comment_container';
-import CommentIndexContainer from '../comments/comment_index_container';
-import CommentIndex from '../comments/comment_index';
+// import CommentIndexContainer from '../comments/comment_index_container';
+// import CommentIndex from '../comments/comment_index';
 
 const MONTHS = Object.freeze([
     "January", "February", "March", "April",
@@ -87,10 +86,10 @@ class PostIndexItem extends React.Component {
         if (this.props.post.likeIds.length > 0)
             return (
                 <div id='like-counter-container'>
-                    <div id='like-icon-container' style={{ backgroundColor: 'teal', borderRadius: '50%', width: '15px', height: '15px' }}>
+                    {/* <div id='like-icon-container' style={{ backgroundColor: 'teal', borderRadius: '50%', width: '15px', height: '15px' }}>
                         <i style={this.props.post.likeIds.length > 0 ? { color: 'white' } : {}} className="far fa-thumbs-up"></i>
-                    </div>
-                    <div id="like_counter">{this.props.post.likeIds.length}</div>
+                    </div> */}
+                    <div id="like_counter">{this.props.post.likeIds.length} {this.props.post.likeIds.length === 1 ? "like" : "likes"}</div>
                 </div>
             );
     }
@@ -100,24 +99,50 @@ class PostIndexItem extends React.Component {
             return <div id="comment_counter">{this.props.post.commentIds.length}</div>
     }
 
+    renderCommentLikeCounter(comment) {
+        if (comment.likeIds.length > 0) return (
+            <div className="comment-like-counter">
+                <div className="comment-like-counter-icontainer">
+                    <i className="far fa-thumbs-up"></i>
+                </div>
+                <p>{comment.likeIds.length}</p>
+            </div>
+        )
+    }
+
     renderComment(id) {
         const comment = this.props.comments[id];
         if (comment)
             return (
                 <div key={id} className="comment-container">
-                    <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
-                    <div className='comment-main'>
-                        <div className="comment-body">
-                            <div className="idekanymore">
-                                <Link className="comment-owner" to={`/users/${this.props.postOwner.first_name}/${this.props.postOwner.last_name}/${this.props.postOwner.id}`}>
-                                    <h2 className='name'>{`${this.props.users[comment.user_id].first_name} ${this.props.users[comment.user_id].last_name}`}</h2>
-                                </Link>
-                                <div className='comment'>
-                                    {comment.body}
+                    <div className="comment-main-content">
+                        <i style={{ color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, fontSize: 36 }} className="fas fa-user-circle" />
+                        <div className='comment-main'>
+                            <div className="comment-body">
+                                <div className="idekanymore">
+                                    <Link className="comment-owner" to={`/users/${this.props.postOwner.first_name}/${this.props.postOwner.last_name}/${this.props.postOwner.id}`}>
+                                        <h2 className='name'>{`${this.props.users[comment.user_id].first_name} ${this.props.users[comment.user_id].last_name}`}</h2>
+                                    </Link>
+                                    <div className='comment'>
+                                        {comment.body}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {this.renderCommentLikeCounter(comment)}
                     </div>
+                    <button onClick={() => {
+                        this.props.createLike({
+                            likeable_type: 'comments',
+                            likeable_id: comment.id,
+                            like: {
+                                likeable_type: 'Comment',
+                                likeable_id: comment.id
+                            }
+                        }); window.location.reload();
+                    }} className='comment-like-button' style={comment.likeIds.length > 0 ?
+                        { top: '-15px' } : { top: '0px' }
+                    }>Like</button>
                 </div>
             )
     }

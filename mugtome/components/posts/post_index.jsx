@@ -12,7 +12,11 @@ class PostIndex extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.modal && this.props.modal === null) window.location.reload();
+        // debugger
+        console.log('hello');
+        if (prevProps.posts !== this.props.posts) {
+            console.log('hi');
+        }
     }
 
     renderPosts() {

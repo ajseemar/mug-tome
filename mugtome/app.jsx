@@ -11,6 +11,8 @@ import FindFriendsContainer from './components/friends/find_friends_container';
 import Modal from './components/widgets/modal';
 import HomeContainer from './components/home/home_container';
 import Messenger from './components/messenger/messenger';
+import FriendIndex from './components/friends/friends_index';
+import PhotoIndex from './components/photos/photoIndex';
 
 const App = () => (
     <div id='app-container'>
@@ -20,6 +22,9 @@ const App = () => (
         <Switch>
             <AuthRoute exact path="/" component={GreetingContainer} />
             <ProtectedRoute path="/users/:user_fn/:user_ln/:id/messenger" component={Messenger} />
+            <ProtectedRoute path="/users/:user_fn/:user_ln/:id/about" component={ProfileContainer} />
+            <ProtectedRoute path="/users/:user_fn/:user_ln/:id/friends" component={FriendIndex} />
+            <ProtectedRoute path="/users/:user_fn/:user_ln/:id/photos" component={PhotoIndex} />
             <ProtectedRoute path="/users/:user_fn/:user_ln/:id" component={ProfileContainer} />
             <ProtectedRoute path="/home/find_friends" component={FindFriendsContainer} />
             <ProtectedRoute exact path="/home" component={HomeContainer} />

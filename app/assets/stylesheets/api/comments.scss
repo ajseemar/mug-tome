@@ -72,4 +72,34 @@
 
 .comment-container {
     margin-bottom: 5px;
+    // position: relative;
+}
+
+.comment-like-button {
+    color: rgb(32, 120, 244);
+    font-size: 12px;
+    border: none;
+    position: relative;
+    left: 50px;
+    background-color: #fff;
+}
+
+.comment-like-counter {
+    display: flex;
+    position: relative;
+    left: 130px;
+    top: -10px;
+    font-size: 12px;
+    .comment-like-counter-icontainer {
+        border-radius: 50%;
+        background-color: saturate(lighten(rgb(32, 120, 244), 10%), 20%);
+        width: 15px;
+        height: 15px;
+
+        i {
+            margin-left: 2px;
+            margin-top: 1px;
+            color: white;
+        }
+    }
 }

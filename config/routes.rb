@@ -30,7 +30,9 @@ Rails.application.routes.draw do
       resources :likes, only: [:index, :create]
     end
 
-    resources :comments, only: [:destroy]
+    resources :comments, only: [:destroy] do
+      resources :likes, only: [:index, :create]
+    end
     resources :likes, only: [:destroy]
   end
 end

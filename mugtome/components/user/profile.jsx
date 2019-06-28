@@ -15,7 +15,7 @@ class Profile extends React.Component {
 
     componentDidMount() {
         // this.props.requestUsers();
-        if (this.props.user === undefined) this.props.requestUser(this.props.match.params.id);
+        if (this.props.currentUser === undefined) this.props.requestUser(this.props.match.params.id);
     }
 
     renderProfileNavbar() {
@@ -30,10 +30,18 @@ class Profile extends React.Component {
                 </div>
                 <nav className="profile-nav">
                     <ul className="nav-links-container">
-                        <li className="nav-link">Timeline</li>
-                        <li className="nav-link">About</li>
-                        <li className="nav-link">Friends</li>
-                        <li className="last-nav-link">Photos</li>
+                        <Link to={`/users/${this.props.currentUser.first_name}/${this.props.currentUser.last_name}/${this.props.currentUser.id}`}>
+                            <li className="nav-link">Timeline</li>
+                        </Link>
+                        <Link to={`/users/${this.props.currentUser.first_name}/${this.props.currentUser.last_name}/${this.props.currentUser.id}/about`}>
+                            <li className="nav-link">About</li>
+                        </Link>
+                        <Link to={`/users/${this.props.currentUser.first_name}/${this.props.currentUser.last_name}/${this.props.currentUser.id}/friends`}>
+                            <li className="nav-link">Friends</li>
+                        </Link>
+                        <Link to={`/users/${this.props.currentUser.first_name}/${this.props.currentUser.last_name}/${this.props.currentUser.id}/photos`}>
+                            <li className="last-nav-link">Photos</li>
+                        </Link>
                     </ul>
                 </nav>
             </header>
