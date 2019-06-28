@@ -28,7 +28,7 @@ class CreateCommentForm extends React.Component {
         this.setState({
             body: ""
         });
-        // window.location.reload();
+        window.location.reload();
     }
 
     render() {
