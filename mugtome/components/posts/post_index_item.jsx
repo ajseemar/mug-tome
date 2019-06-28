@@ -20,8 +20,6 @@ class PostIndexItem extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.requestComments({ commentable_type: 'posts', commentable_id: this.props.post.id });
-        this.props.requestLikes({ likeable_type: 'posts', likeable_id: this.props.post.id })
         if (!this.props.postOwner) this.props.requestUser(this.props.post.user_id);
     }
 
@@ -83,19 +81,23 @@ class PostIndexItem extends React.Component {
     };
 
     renderLikeCounter() {
-        if (this.props.post.likeIds.length > 0)
+        if (!this.props.post.likes) return;
+        const { likes } = this.props.post;
+        if ((Object.keys(likes)).length > 0)
             return (
                 <div id='like-counter-container'>
                     {/* <div id='like-icon-container' style={{ backgroundColor: 'teal', borderRadius: '50%', width: '15px', height: '15px' }}>
                         <i style={this.props.post.likeIds.length > 0 ? { color: 'white' } : {}} className="far fa-thumbs-up"></i>
                     </div> */}
-                    <div id="like_counter">{this.props.post.likeIds.length} {this.props.post.likeIds.length === 1 ? "like" : "likes"}</div>
+                    <div id="like_counter">{this.props.post.likes ? Object.keys(this.props.post.likes).length : 0} {this.props.post.likes && Object.keys(this.props.post.likes) === 1 ? "like" : "likes"}</div>
                 </div>
             );
     }
 
     renderCommentCounter() {
-        if (this.props.post.commentIds.length > 0)
+        if (!this.props.post.comments) return;
+        const { comments } = this.props.post;
+        if (Object.keys(comments).length > 0)
             return <div id="comment_counter">{this.props.post.commentIds.length}</div>
     }
 
@@ -166,7 +168,8 @@ class PostIndexItem extends React.Component {
             }
         };
         this.props.createLike(params);
-        window.location.reload();
+        this.props.requestPost(this.props.post.id);
+        // window.location.reload();
         // this.setState({ liked: true })
     }
 
@@ -198,14 +201,14 @@ class PostIndexItem extends React.Component {
                 <footer>
                     <div id="counters">
                         {this.renderLikeCounter()}
-                        <div id="comment_counter">{this.props.post.commentIds.length} comments</div>
+                        <div id="comment_counter">{this.props.post.comments ? Object.keys(this.props.post.comments).length : 0} comments</div>
                     </div>
 
                     <hr style={{ margin: 0, width: '100%' }} />
 
                     <div className="post-actions-container">
-                        <button onClick={this.createLike.bind(this)} style={this.props.post.likeIds.length > 0 ? { color: 'teal' } : {}} >
-                            <i style={this.props.post.likeIds.length > 0 ? { color: 'teal' } : {}} className="far fa-thumbs-up"></i>
+                        <button onClick={this.createLike.bind(this)} style={this.props.post.likes && Object.keys(this.props.post.likes).length > 0 ? { color: 'teal' } : {}} >
+                            <i style={this.props.post.likes && Object.keys(this.props.post.likes).length > 0 ? { color: 'teal' } : {}} className="far fa-thumbs-up"></i>
                             Like
                         </button>
                         <div>
@@ -218,8 +221,8 @@ class PostIndexItem extends React.Component {
                     <div style={{ display: "block" }}>
                         <hr style={{ marginTop: 0, width: '100%' }} />
                     </div>
-                    {this.renderComments()}
-                    <CreateCommentContainer type="Post" typeId={this.props.post.id} />
+                    {/* {this.renderComments()}
+                    <CreateCommentContainer type="Post" typeId={this.props.post.id} /> */}
                 </footer>
 
             </div>

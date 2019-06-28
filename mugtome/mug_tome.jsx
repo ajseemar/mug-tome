@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     incoming: [],
                     outgoing: []
                 },
-                posts: {},
-                comments: {},
-                likes: {}
+                posts: {}
+                // comments: {},
+                // likes: {}
             },
             errors: {
                 session: []

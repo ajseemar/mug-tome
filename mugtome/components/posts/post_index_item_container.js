@@ -7,7 +7,7 @@ import PostIndexItem from './post_index_item';
 import { requestComments } from '../../actions/comment_actions';
 
 import { createLike, requestLikes, deleteLike } from '../../actions/like_actions';
-import { deletePost } from '../../actions/post_actions';
+import { deletePost, requestPost } from '../../actions/post_actions';
 
 const msp = (state, ownProps) => {
     let timelineOwner = null;
@@ -28,7 +28,8 @@ const mdp = dispatch => ({
     requestComments: params => dispatch(requestComments(params)),
     createLike: params => dispatch(createLike(params)),
     requestLikes: params => dispatch(requestLikes(params)),
-    deleteLike: id => dispatch(deleteLike(id))
+    deleteLike: id => dispatch(deleteLike(id)),
+    requestPost: id => dispatch(requestPost(id))
 });
 
 const PostIndexItemContainer = withRouter(connect(msp, mdp)(PostIndexItem));

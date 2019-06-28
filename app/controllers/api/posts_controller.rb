@@ -4,6 +4,15 @@ class Api::PostsController < ApplicationController
         render :index
     end
 
+    def show
+        @post = Post.find(params[:id])
+        if @post
+            render :show
+        else
+            render json: @post.errors, status: 404
+        end
+    end
+
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id

@@ -13,7 +13,6 @@ class PostIndex extends React.Component {
 
     componentDidUpdate(prevProps) {
         // debugger
-        console.log('hello');
         if (prevProps.posts !== this.props.posts) {
             console.log('hi');
         }

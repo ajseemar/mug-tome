@@ -9,6 +9,6 @@ export default combineReducers({
     users: UsersReducer,
     friendRequests: FriendRequestsReducer,
     posts: PostsReducer,
-    comments: CommentsReducer,
-    likes: LikesReducer
+    // comments: CommentsReducer,
+    // likes: LikesReducer
 });
