@@ -23,7 +23,6 @@ class CreateCommentForm extends React.Component {
             commentable_id: this.props.typeId,
             comment: this.state
         }
-        // console.log('submitted comment', params);
         this.props.createComment(params);
         this.setState({
             body: ""

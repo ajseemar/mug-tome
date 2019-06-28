@@ -8,7 +8,6 @@ class PostIndex extends React.Component {
     }
 
     componentDidMount() {
-        // debugger
         this.props.requestPosts();
     }
 

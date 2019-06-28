@@ -14,7 +14,6 @@ class Api::LikesController < ApplicationController
             @like.save
             render :show
         else
-            # debugger
             Like.find_by(likeable_type: params[:like][:likeable_type], likeable_id: params[:like][:likeable_id], user_id: current_user.id).destroy
         end
     end

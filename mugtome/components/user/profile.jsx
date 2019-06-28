@@ -9,16 +9,16 @@ import Modal from '../widgets/modal';
 
 
 class Profile extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         // this.props.requestUsers();
-        if (this.props.user === undefined) this.props.requestUser(this.props.match.params.id).then(res => console.log(res));
+        if (this.props.user === undefined) this.props.requestUser(this.props.match.params.id);
     }
 
-    renderProfileNavbar () {
+    renderProfileNavbar() {
         return (
             <header className="profile-header">
                 <div className="background-image-container"></div>
@@ -40,7 +40,7 @@ class Profile extends React.Component {
         );
     }
 
-    renderPostInputContainer () {
+    renderPostInputContainer() {
         return (
             <div className="create-post-normal-container" onClick={() => this.props.openModal({ component: 'create_post', id: this.props.match.params.id })}>
                 <Modal />
@@ -79,7 +79,7 @@ class Profile extends React.Component {
         );
     }
 
-    render () {
+    render() {
         if (this.props.currentUser === undefined) return null;
         return (
             <div className="profile-page-container">
@@ -93,7 +93,7 @@ class Profile extends React.Component {
                         <div className="timeline-main-content">
                             {this.renderPostInputContainer()}
                             <div className="modal-background" style={{ display: 'none' }}></div>
-                            <PostIndexContainer user_id={this.props.match.params.id}/>
+                            <PostIndexContainer user_id={this.props.match.params.id} />
                         </div>
                     </main>
                 </div>

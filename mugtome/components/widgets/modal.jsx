@@ -19,18 +19,16 @@ function Modal(props) {
         //     component = <SignupFormContainer />;
         //     break;
         case 'create_post':
-            // debugger
             component = (
                 <div className="create-post-modal-container">
-                    <CreatePostWidgetContainer id={modal.id}/>
+                    <CreatePostWidgetContainer id={modal.id} />
                 </div>
             );
             break;
         default:
-            // debugger
             return null;
-            // component = <h1>Create Post Form should go here bro</h1>;
-            // break;
+        // component = <h1>Create Post Form should go here bro</h1>;
+        // break;
     }
     // const closeModal = 
     const update = (e) => {

@@ -6,7 +6,6 @@ class CommentIndex extends React.Component {
         super(props);
         this.state = { comments: {} };
         this.populateState();
-        debugger
     }
 
     populateState() {

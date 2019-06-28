@@ -21,7 +21,6 @@ class PostIndexItem extends React.Component {
         }
     }
     componentDidMount() {
-        // debugger
         this.props.requestComments({ commentable_type: 'posts', commentable_id: this.props.post.id });
         this.props.requestLikes({ likeable_type: 'posts', likeable_id: this.props.post.id })
         if (!this.props.postOwner) this.props.requestUser(this.props.post.user_id);
@@ -61,7 +60,6 @@ class PostIndexItem extends React.Component {
     }
 
     PostSettings(props) {
-        // debugger;
         if (props.user.id === props.postOwner.id) return (
             <div className="options-container">
                 <button onClick={() => props.deletePost(props.post.id)}>Delete</button>
@@ -70,7 +68,6 @@ class PostIndexItem extends React.Component {
     }
 
     renderPostSettings(/*{ user, postOwner, deletePost } */) {
-        // debugger;
         // let visible = false;
 
         // return () => {
