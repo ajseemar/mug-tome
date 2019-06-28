@@ -18,6 +18,7 @@ const App = () => (
         {/* <Modal /> */}
         <Switch>
             <AuthRoute exact path="/" component={GreetingContainer} />
+            <ProtectedRoute path="/users/:user_fn/:user_ln/:id/messenger" component={Messenger} />
             <ProtectedRoute path="/users/:user_fn/:user_ln/:id" component={ProfileContainer} />
             <ProtectedRoute path="/home/find_friends" component={FindFriendsContainer} />
             <ProtectedRoute exact path="/home" component={HomeContainer} />

@@ -1,5 +1,6 @@
 #home-page-container {
     background-color: #E9EBEE;
+    min-height: 1047px;
 }
 .home-page-main-content {
     display: flex;
@@ -16,7 +17,7 @@
 }
 
 .features-navigation-container {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .news-feed-container {
@@ -29,22 +30,42 @@
     margin-bottom: 5px;
     cursor: pointer;
     border-radius: 2px;
+    padding: 5px;
 
-    h2 {
-        margin-left: 8px;
+    .name-container-holderdiv {
+        // margin-left: 8px;
+        display: block;
+        margin-left: 2px;
+        max-width: 126px;
+        overflow: hidden;
+        padding-left: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:  #1d2129;
     }
+    font-size: 14px;
+    // font-weight: 600;
 
 }
-.feature:hover {
-    background-color: lighten($color: pink, $amount: 15%);
+.feature:hover, #profile-nav-link-container:hover {
+    background-color: lighten($color: #E9EBEE, $amount: 5%);
 }
 
 #profile-nav-link-container {
     margin-bottom: 15px;
+    display: flex;
+    align-content: center;
+
+    i {
+        margin-right: 10px;
+    }
 }
 
 .feature img {
    height: 20px;
+   margin-right: 10px;
 }
 
-// 325 10
+.news-feed-main {
+    margin-top: 20px;
+}
