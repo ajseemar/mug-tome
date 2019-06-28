@@ -5,12 +5,9 @@ import { requestUser } from '../../actions/user_actions';
 
 import PostIndexItem from './post_index_item';
 import { requestComments } from '../../actions/comment_actions';
-import { selectComments } from '../../reducers/selectors';
 
-// import PostIndexItem from './post_index_item';
-// import { requestUser } from '../../actions/users';
-// import { deletePost } from '../../actions/posts';
 import { createLike, requestLikes, deleteLike } from '../../actions/like_actions';
+import { deletePost } from '../../actions/post_actions';
 
 const msp = (state, ownProps) => {
     let timelineOwner = null;

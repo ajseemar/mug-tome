@@ -49,27 +49,27 @@ class Home extends React.Component {
                         </div>
 
                         <div className="feature">
-                            <Link className="comment-owner" to={`/users/${this.props.currentUser.first_name}/${this.props.currentUser.last_name}/${this.props.currentUser.id}/messenger`}></Link>
                             <img src={window.messengerImgUrl} />
-                            <h2>Messenger</h2>
+                            <Link className="messenger-nav-link" to={`/users/${this.props.currentUser.first_name}/${this.props.currentUser.last_name}/${this.props.currentUser.id}/messenger`}>
+                                <h2>Messenger</h2>
                             </Link>
+                        </div>
                     </div>
+
+                    <div className="news-feed-container">
+                        <CreatePostWidgetContainer />
+                        <div className="news-feed-main">
+                            {this.renderFeed()}
+                        </div>
+                    </div>
+
+                    <footer>
+                        <div className="widgets-container">
+                            <Footer />
+                        </div>
+                    </footer>
+
                 </div>
-
-                <div className="news-feed-container">
-                    <CreatePostWidgetContainer />
-                    <div className="news-feed-main">
-                        {this.renderFeed()}
-                    </div>
-                </div>
-
-                <footer>
-                    <div className="widgets-container">
-                        <Footer />
-                    </div>
-                </footer>
-
-            </div>
             </div >
         )
     }

@@ -125,3 +125,12 @@ $FB_BLUE: #4267b2;
         display: inline;
     }
 }
+
+.post-settings-button-container {
+    display: flex;
+    flex-direction: column;
+
+    i {
+        position: relative;
+    }
+}

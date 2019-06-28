@@ -31,6 +31,7 @@
     cursor: pointer;
     border-radius: 2px;
     padding: 5px;
+    
 
     .name-container-holderdiv {
         // margin-left: 8px;
@@ -68,4 +69,9 @@
 
 .news-feed-main {
     margin-top: 20px;
+}
+
+.messenger-nav-link {
+    text-decoration: none;
+    color:  #1d2129;
 }

@@ -10,6 +10,7 @@ import FindFriendsContainer from './components/friends/find_friends_container';
 // import Home from './components/home/home';
 import Modal from './components/widgets/modal';
 import HomeContainer from './components/home/home_container';
+import Messenger from './components/messenger/messenger';
 
 const App = () => (
     <div id='app-container'>

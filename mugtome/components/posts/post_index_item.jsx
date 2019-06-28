@@ -16,7 +16,8 @@ class PostIndexItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            liked: false
+            liked: false,
+            toggled: false
         }
     }
     componentDidMount() {
@@ -68,15 +69,21 @@ class PostIndexItem extends React.Component {
         );
     }
 
-    renderPostSettings({ user, postOwner, deletePost }) {
+    renderPostSettings(/*{ user, postOwner, deletePost } */) {
         // debugger;
-        let visible = false;
+        // let visible = false;
 
-        return () => {
-            visible = !visible;
-            if (visible) ReactDOM.render(<this.PostSettings post={this.props.post} user={user} postOwner={postOwner} deletePost={deletePost} />, document.getElementById('post-settings-container'));
-            else ReactDOM.render(<></>, document.getElementById('post-settings-container'));
-        }
+        // return () => {
+        //     visible = !visible;
+        //     if (visible) ReactDOM.render(<this.PostSettings post={this.props.post} user={user} postOwner={postOwner} deletePost={deletePost} />, document.getElementById('post-settings-container'));
+        //     else ReactDOM.render(<></>, document.getElementById('post-settings-container'));
+        // }
+        if (this.state.toggled) return (
+            <ul>
+                <li>Delete Post</li>
+            </ul>
+        )
+
     };
 
     renderLikeCounter() {
@@ -155,8 +162,9 @@ class PostIndexItem extends React.Component {
                             {this.renderName(this.props)}
                             <h3>{this.renderTime(this.props.post)}</h3>
                         </div>
-                        <div id='post-settings-button-container'>
-                            <i id='post-settings-container' className="fas fa-ellipsis-h"></i>
+                        <div className='post-settings-button-container'>
+                            <i onClick={() => this.setState({ toggled: !this.state.toggled })} id='post-settings-container' className="fas fa-ellipsis-h"></i>
+                            <div className="post-settings">{this.renderPostSettings()}</div>
                         </div>
                     </div>
                 </header>
