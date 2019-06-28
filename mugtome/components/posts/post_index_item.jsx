@@ -122,22 +122,17 @@ class PostIndexItem extends React.Component {
     }
 
     createLike() {
-        if (this.state.liked) {
-            this.props.deleteLike();
-        }
-        else {
-            const params = {
-                likeable_type: 'posts',
-                likeable_id: this.props.post.id,
-                like: {
-                    likeable_type: 'Post',
-                    likeable_id: this.props.post.id
-                }
-            };
-            this.props.createLike(params);
-            // window.location.reload()
-            this.setState({ liked: true })
-        }
+        const params = {
+            likeable_type: 'posts',
+            likeable_id: this.props.post.id,
+            like: {
+                likeable_type: 'Post',
+                likeable_id: this.props.post.id
+            }
+        };
+        this.props.createLike(params);
+        window.location.reload();
+        // this.setState({ liked: true })
     }
 
     render() {

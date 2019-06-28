@@ -18,5 +18,9 @@ json.likeIds do
 end
 
 json.feedPostIds do 
-    json.array! user.posts_to_feed.order(created_at: :desc).map { |post| post.id }
+    json.array! user.posts_to_timeline.order(created_at: :desc).map { |post| post.id }
+end
+
+json.newsFeedPostIds do
+    json.array! user.posts_to_news_feed.order(created_at: :desc).map { |post| post.id }
 end

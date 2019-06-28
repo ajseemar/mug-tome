@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
     def index
-        @posts = Post.where(friend_id: current_user.id).order(created_at: :desc)
+        @posts = Post.all.order(created_at: :desc)
         render :index
     end
 

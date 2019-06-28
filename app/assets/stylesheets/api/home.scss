@@ -1,0 +1,50 @@
+#home-page-container {
+    background-color: #E9EBEE;
+}
+.home-page-main-content {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 10px;
+    // background: #E9EBEE;
+
+    footer {
+    width: 325px;
+    margin-left: 10px;
+}
+}
+
+.features-navigation-container {
+    margin-right: 20px;
+}
+
+.news-feed-container {
+    width: 525px;
+}
+ 
+.features-navigation-container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+
+    h2 {
+        margin-left: 8px;
+    }
+
+}
+.feature:hover {
+    background-color: lighten($color: pink, $amount: 15%);
+}
+
+#profile-nav-link-container {
+    margin-bottom: 15px;
+}
+
+.feature img {
+   height: 20px;
+}
+
+// 325 10

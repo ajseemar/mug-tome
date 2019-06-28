@@ -10,10 +10,12 @@ class Api::LikesController < ApplicationController
     def create
         @like = Like.new(like_params)
         @like.user_id = current_user.id
-        if @like.save
+        if @like.valid?
+            @like.save
             render :show
         else
-            render json: @like.errors, status: 400
+            # debugger
+            Like.find_by(likeable_type: params[:like][:likeable_type], likeable_id: params[:like][:likeable_id], user_id: current_user.id).destroy
         end
     end
 

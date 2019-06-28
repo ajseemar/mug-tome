@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import NavbarContainer from '../navbar/navbar_container';
 
 class FindFriends extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             users: {},
@@ -12,8 +12,8 @@ class FindFriends extends React.Component {
         }
         this.height = 400;
     }
-    
-    populateState () {
+
+    populateState() {
         const { users, currentUser } = this.props;
         const incoming = this.props.friendRequests.incoming.map(req => req.user_id);
         const outgoing = this.props.friendRequests.outgoing.map(req => req.friend_id)
@@ -23,18 +23,18 @@ class FindFriends extends React.Component {
         ));
         candidates.forEach(user => this.state.users[user.id] = user);
     }
-    
-    componentDidMount () {
-        this.props.fetchFriendRequests().then(() => this.populateState());
-        this.populateState();
-    }
-    
-    updateState () {
+
+    componentDidMount() {
         this.props.fetchFriendRequests().then(() => this.populateState());
         this.populateState();
     }
 
-    checkForRequests (field) {
+    updateState() {
+        this.props.fetchFriendRequests().then(() => this.populateState());
+        this.populateState();
+    }
+
+    checkForRequests(field) {
         if (field === "incoming") {
             if (this.props.friendRequests.incoming.length === 0) {
                 return <p id='request-title-header'>No New Friend Requests</p>
@@ -46,15 +46,15 @@ class FindFriends extends React.Component {
         }
     }
 
-    addFriend (id) {
+    addFriend(id) {
         this.props.createFriendRequest({ friend_request: { user_id: this.props.currentUser.id, friend_id: id } });
     }
 
-    acceptFriend (req) {
+    acceptFriend(req) {
         this.props.acceptFriendRequest(req)
     }
 
-    rejectFriend (id) {
+    rejectFriend(id) {
         this.props.deleteFriendRequest(id);
         this.updateState(id);
     }
@@ -69,26 +69,26 @@ class FindFriends extends React.Component {
         )
     }
 
-    renderIncomingRequests () {
+    renderIncomingRequests() {
         if (Object.values(this.props.friendRequests.incoming).length > 0 && Object.values(this.props.users).length > 0)
-        return (
-            <div className="outgoing-requests">
-            {
-                Object.values(this.props.friendRequests.incoming).map(req => (
-                    <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
-                        {this.renderIncomingRequestLink(req)}
-                        <div className="incoming-request-actions">
-                            <button id='accept-friend-action-button' onClick={() => this.acceptFriend(req)}><i className="fas fa-user-plus"></i>Accept</button>
-                            <button id='reject-friend-action-button' onClick={() => this.rejectFriend(req.id)}>Reject</button>
-                        </div>
-                    </div>
-                ))
-            }
-            </div>
-        )
+            return (
+                <div className="outgoing-requests">
+                    {
+                        Object.values(this.props.friendRequests.incoming).map(req => (
+                            <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
+                                {this.renderIncomingRequestLink(req)}
+                                <div className="incoming-request-actions">
+                                    <button id='accept-friend-action-button' onClick={() => this.acceptFriend(req)}><i className="fas fa-user-plus"></i>Accept</button>
+                                    <button id='reject-friend-action-button' onClick={() => this.rejectFriend(req.id)}>Reject</button>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            )
     }
 
-    renderOutgoingRequestLink (req) {
+    renderOutgoingRequestLink(req) {
         if (!this.props.users[req.friend_id]) return null;
         return (
             <Link className="outgoing-request-user-info" to={`/users/${this.props.users[req.friend_id].first_name}/${this.props.users[req.friend_id].last_name}/${this.props.users[req.friend_id].id}`}>
@@ -98,26 +98,26 @@ class FindFriends extends React.Component {
         )
     }
 
-    renderOutgoingRequests () {
+    renderOutgoingRequests() {
         if (Object.values(this.props.friendRequests.outgoing).length > 0 && Object.values(this.props.users).length > 0)
-        return (
-            <div className="outgoing-requests">
-                {Object.values(this.props.friendRequests.outgoing).map(req => (
-                    <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
-                        {this.renderOutgoingRequestLink(req)}
-                        <button id='delete-friend-request' onClick={this.rejectFriend.bind(this,req.id)}>Unsend</button>
-                    </div>
-                ))}
-            </div>
-        )
+            return (
+                <div className="outgoing-requests">
+                    {Object.values(this.props.friendRequests.outgoing).map(req => (
+                        <div key={`${req.id}-${req.user_id}-${req.friend_id}`} className="outgoing-request">
+                            {this.renderOutgoingRequestLink(req)}
+                            <button id='delete-friend-request' onClick={this.rejectFriend.bind(this, req.id)}>Unsend</button>
+                        </div>
+                    ))}
+                </div>
+            )
     }
 
-    renderFriendRequests () {
+    renderFriendRequests() {
         if (this.state.incoming) return (
             <div className="incoming-requests-container">
                 {this.renderIncomingRequests()}
             </div>
-        ); 
+        );
         else return (
             <div className="outgoing-requests-container">
                 {this.renderOutgoingRequests()}
@@ -125,11 +125,11 @@ class FindFriends extends React.Component {
         );
     }
 
-    renderCandidates () {
+    renderCandidates() {
         return (
             <div id="potential-friends-container">
                 <p id='request-title-header'>People You May Know</p>
-                <hr/>
+                <hr />
                 <div id="potential-friends">
                     {Object.values(this.state.users).splice(0, 30).map((user, idx) => (
                         <div key={`${user.first_name}-${user.last_name}-${idx}`} className="potential-friend-request-container">
@@ -141,7 +141,7 @@ class FindFriends extends React.Component {
                             </div>
                             <div className="user-request-actions">
                                 <button id='add-friend-action-button' onClick={() => this.addFriend(user.id)}>Add Friend</button>
-                                <button id='remove-friend-action-button'onClick={() => this.updateState(user.id)}>Remove</button>
+                                <button id='remove-friend-action-button' onClick={() => this.updateState(user.id)}>Remove</button>
                             </div>
                         </div>
                     ))}
@@ -150,7 +150,7 @@ class FindFriends extends React.Component {
         );
     }
 
-    render () {
+    render() {
         return (
             <div id="find-friends-page-container">
                 <NavbarContainer />
@@ -162,7 +162,7 @@ class FindFriends extends React.Component {
                             incoming: !this.state.incoming
                         })}>{this.state.incoming ? "View Sent Requests" : "View Received Requests"}</button>
                     </div>
-                    { this.renderCandidates() }
+                    {this.renderCandidates()}
                 </div>
             </div>
         )

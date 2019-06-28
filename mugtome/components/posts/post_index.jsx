@@ -3,7 +3,7 @@ import React from 'react';
 import PostIndexItemContainer from './post_index_item_container';
 
 class PostIndex extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
     }
 
@@ -16,14 +16,14 @@ class PostIndex extends React.Component {
         if (prevProps.modal && this.props.modal === null) window.location.reload();
     }
 
-    renderPosts () {
+    renderPosts() {
         if (this.props.posts && this.props.posts.length > 0)
             return this.props.posts.map((post, idx) => (
                 <PostIndexItemContainer key={idx} post={post} />
             ));
     }
 
-    render () {
+    render() {
         return (
             <div className="post-index-container">
                 <h3>Posts</h3>
