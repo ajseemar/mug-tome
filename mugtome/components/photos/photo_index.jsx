@@ -2,7 +2,7 @@ import React from 'react';
 import NavbarContainer from '../navbar/navbar_container';
 import ProfileNavbar from '../user/profile_navbar';
 
-class FriendIndex extends React.Component {
+class PhotoIndex extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -18,16 +18,17 @@ class FriendIndex extends React.Component {
                             <div className='main-header-sub'>
                                 <div className="component-title">
                                     <img src={window.photoImgUrl} />
-                                    <div className='main-title'>Friends</div>
+                                    <div className='main-title'>Photos</div>
                                 </div>
                                 <div className="component-actions">
                                     <div className="create-actions">
-                                        <button>+ Find Friends</button>
+                                        <button>+ Create Album</button><button>Add Photos</button>
                                     </div>
                                 </div>
                             </div>
                             <nav>
-                                <div>All Friends</div>
+                                <div>Your Photos</div>
+                                <div>Albums</div>
                             </nav>
                         </div>
                     </header>
@@ -38,8 +39,8 @@ class FriendIndex extends React.Component {
                     </main>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default FriendIndex;
+export default PhotoIndex;

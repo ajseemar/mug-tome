@@ -19,12 +19,17 @@ class PostIndexItem extends React.Component {
             toggled: false
         }
     }
+
     componentDidMount() {
         if (!this.props.postOwner) this.props.requestUser(this.props.post.user_id);
     }
 
-    redirect(path) {
-        this.props.history.replace(path);
+    componentDidUpdate(prevProps) {
+        // debugger
+        if (this.props.post !== prevProps.post) {
+            // this.props.requestPost(prevProps.post.id);
+        }
+        // console.log('hi');
     }
 
     renderName({ postOwner, timelineOwner }) {
@@ -56,22 +61,7 @@ class PostIndexItem extends React.Component {
         return `${MONTHS[parseInt(mth)]} ${day} at ${hour === 0 ? 12 : hour}:${mins} ${parseInt(hrs) > 12 ? 'PM' : 'AM'}`;
     }
 
-    PostSettings(props) {
-        if (props.user.id === props.postOwner.id) return (
-            <div className="options-container">
-                <button onClick={() => props.deletePost(props.post.id)}>Delete</button>
-            </div>
-        );
-    }
-
-    renderPostSettings(/*{ user, postOwner, deletePost } */) {
-        // let visible = false;
-
-        // return () => {
-        //     visible = !visible;
-        //     if (visible) ReactDOM.render(<this.PostSettings post={this.props.post} user={user} postOwner={postOwner} deletePost={deletePost} />, document.getElementById('post-settings-container'));
-        //     else ReactDOM.render(<></>, document.getElementById('post-settings-container'));
-        // }
+    renderPostSettings() {
         if (this.state.toggled) return (
             <ul>
                 <li>Delete Post</li>
@@ -86,19 +76,28 @@ class PostIndexItem extends React.Component {
         if ((Object.keys(likes)).length > 0)
             return (
                 <div id='like-counter-container'>
-                    {/* <div id='like-icon-container' style={{ backgroundColor: 'teal', borderRadius: '50%', width: '15px', height: '15px' }}>
-                        <i style={this.props.post.likeIds.length > 0 ? { color: 'white' } : {}} className="far fa-thumbs-up"></i>
-                    </div> */}
-                    <div id="like_counter">{this.props.post.likes ? Object.keys(this.props.post.likes).length : 0} {this.props.post.likes && Object.keys(this.props.post.likes) === 1 ? "like" : "likes"}</div>
+                    <div id="like_counter">
+                        {
+                            this.props.post.likes ?
+                                Object.keys(this.props.post.likes).length : 0
+                        } {
+                            this.props.post.likes && Object.keys(this.props.post.likes) === 1 ?
+                                "like" : "likes"
+                        }
+                    </div>
                 </div>
             );
     }
 
     renderCommentCounter() {
         if (!this.props.post.comments) return;
+
         const { comments } = this.props.post;
-        if (Object.keys(comments).length > 0)
-            return <div id="comment_counter">{this.props.post.commentIds.length}</div>
+        if (Object.keys(comments).length > 0) {
+            return (
+                <div id="comment_counter">{this.props.post.commentIds.length}</div>
+            );
+        }
     }
 
     renderCommentLikeCounter(comment) {
@@ -109,7 +108,7 @@ class PostIndexItem extends React.Component {
                 </div>
                 <p>{comment.likeIds.length}</p>
             </div>
-        )
+        );
     }
 
     renderComment(id) {
@@ -168,9 +167,7 @@ class PostIndexItem extends React.Component {
             }
         };
         this.props.createLike(params);
-        this.props.requestPost(this.props.post.id);
-        // window.location.reload();
-        // this.setState({ liked: true })
+        // this.props.requestPost(this.props.post.id);
     }
 
     render() {

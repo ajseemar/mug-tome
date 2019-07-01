@@ -1,4 +1,6 @@
 import React from 'react';
+import NavbarContainer from '../navbar/navbar_container';
+import MessengerSearchBar from './messenger_search_bar';
 
 class Messenger extends React.Component {
     constructor(props) {
@@ -7,7 +9,28 @@ class Messenger extends React.Component {
 
     render() {
         return (
-            <h1>Welcome to mugtome Messenger</h1>
+            <div className="messenger-page">
+                <NavbarContainer />
+                <main>
+                    <section className='contact-navigator'>
+                        <header>
+                            <i className="fas fa-cog"></i>
+                            <p>Messages</p>
+                            <i className="far fa-edit"></i>
+                        </header>
+                        <div className='messenger-search'>
+                            <MessengerSearchBar />
+                        </div>
+                        <div>
+                            <ul className="message-list"></ul>
+                        </div>
+                    </section>
+                    <section>
+                        <div></div>
+                        <div></div>
+                    </section>
+                </main>
+            </div>
         );
     }
 }

@@ -118,3 +118,15 @@
         }
     }
 }
+
+.nav-links-container {
+    a {
+        text-decoration: none;
+    }
+    .nav-link, .last-nav-link {
+        font-size: 14px;
+        font-weight: 600;
+        // line-height: 3.05;
+        color: #385898;
+    }
+}
