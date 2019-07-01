@@ -26,8 +26,8 @@ class Messenger extends React.Component {
                         </div>
                     </section>
                     <section>
-                        <div></div>
-                        <div></div>
+                        <div className='conversation-container'></div>
+                        <div className='conversation-settings-container'></div>
                     </section>
                 </main>
             </div>

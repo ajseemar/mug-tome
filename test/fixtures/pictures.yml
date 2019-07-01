@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  user_id    :integer
 #  album_id   :integer
-#  content    :text
+#  caption    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
