@@ -9,7 +9,14 @@ const PostsReducer = (state = {}, action) => {
         case RECEIVE_POSTS:
             return action.posts;
         case RECEIVE_POST:
-            return merge({}, state, { [action.post.id]: action.post })
+
+            if (action.post.likes) {
+                return merge({}, state, { [action.post.id]: action.post })
+            } else {
+                let qnewState = merge({}, state)
+                delete qnewState[action.post.id]
+                return merge({}, qnewState, { [action.post.id]: action.post })
+            }
         case REMOVE_POST:
             const newState = merge({}, state);
             delete newState[action.postId];

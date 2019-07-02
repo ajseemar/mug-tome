@@ -16,7 +16,8 @@ class PostIndexItem extends React.Component {
         super(props);
         this.state = {
             liked: false,
-            toggled: false
+            toggled: false,
+            post: this.props.post
         }
     }
 
@@ -31,6 +32,10 @@ class PostIndexItem extends React.Component {
         }
         // console.log('hi');
     }
+
+    // componentWillReceiveProps() {
+    //     this.renderLikeCounter()
+    // }
 
     renderName({ postOwner, timelineOwner }) {
         if (timelineOwner) return (
@@ -71,22 +76,25 @@ class PostIndexItem extends React.Component {
     };
 
     renderLikeCounter() {
-        if (!this.props.post.likes) return;
-        const { likes } = this.props.post;
+        // if (!this.props.post.likes) return;
+        const { likes } = this.state.post;
+        console.log(likes)
+        if (!likes) return;
         if ((Object.keys(likes)).length > 0)
-            return (
-                <div id='like-counter-container'>
-                    <div id="like_counter">
-                        {
-                            this.props.post.likes ?
-                                Object.keys(this.props.post.likes).length : 0
-                        } {
-                            this.props.post.likes && Object.keys(this.props.post.likes) === 1 ?
-                                "like" : "likes"
-                        }
-                    </div>
+            debugger
+        return (
+            <div id='like-counter-container'>
+                <div id="like_counter">
+                    {
+                        likes ?
+                            Object.keys(likes).length : 0
+                    } {
+                        likes && Object.keys(likes).length === 1 ?
+                            "like" : "likes"
+                    }
                 </div>
-            );
+            </div>
+        );
     }
 
     renderCommentCounter() {
@@ -166,8 +174,29 @@ class PostIndexItem extends React.Component {
                 likeable_id: this.props.post.id
             }
         };
-        this.props.createLike(params);
-        // this.props.requestPost(this.props.post.id);
+        this.props.createLike(params).then(() => {
+            this.props.requestPost(this.props.post.id).then((post) => {
+                this.setState({
+                    liked: !this.state.liked,
+                    post: post
+                });
+            });
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        // if (this.props.liked !== nextProps.liked) {
+        //     this.setState({
+        //         liked: nextProps.liked
+        //     });
+        // }
+        if (this.props.post && nextProps.post) {
+            if (this.props.post.likes && nextProps.post.likes && Object.keys(this.props.post.likes).length !== Object.keys(nextProps.post.likes).length) {
+                this.setState({
+                    post: nextProps.post
+                });
+            }
+        }
     }
 
     render() {
@@ -204,8 +233,8 @@ class PostIndexItem extends React.Component {
                     <hr style={{ margin: 0, width: '100%' }} />
 
                     <div className="post-actions-container">
-                        <button onClick={this.createLike.bind(this)} style={this.props.post.likes && Object.keys(this.props.post.likes).length > 0 ? { color: 'teal' } : {}} >
-                            <i style={this.props.post.likes && Object.keys(this.props.post.likes).length > 0 ? { color: 'teal' } : {}} className="far fa-thumbs-up"></i>
+                        <button onClick={this.createLike.bind(this)} style={this.state.liked ? { color: 'teal' } : {}} >
+                            <i style={this.state.liked ? { color: 'teal' } : {}} className="far fa-thumbs-up"></i>
                             Like
                         </button>
                         <div>

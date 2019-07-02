@@ -6,6 +6,7 @@ class Api::PostsController < ApplicationController
 
     def show
         @post = Post.find(params[:id])
+        # debugger
         if @post
             render :show
         else
@@ -16,6 +17,7 @@ class Api::PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id
+        @post.friend_id ||= current_user.id
         if @post.save
             render :show
         else

@@ -1,7 +1,7 @@
 import React from 'react';
 
 class CreatePostWidget extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = this.props.post;
         setTimeout(function () {
@@ -20,12 +20,16 @@ class CreatePostWidget extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.createPost(this.state);
-        this.setState(this.props.post);
-        this.props.closeModal();
+        this.props.createPost(this.state).then(() => {
+            this.setState({ post: this.props.post })
+            this.props.closeModal();
+            this.props.requestUser(this.props.currentUser.id);
+        });
+
+        // });
     }
 
-    render () {
+    render() {
         return (
             <div className="create-post-widget">
                 <div className="modal-header-container">
@@ -41,7 +45,7 @@ class CreatePostWidget extends React.Component {
                     </form>
                 </div>
                 <div className="create-post-modal-break"></div>
-                
+
                 <div className="post-modal-share-button-container">
                     <button className="post-modal-share-button" type='submit' form='create-post-form'>Share</button>
                 </div>
