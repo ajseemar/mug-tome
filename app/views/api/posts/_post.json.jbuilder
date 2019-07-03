@@ -13,5 +13,13 @@ json.set! :likes do
 end
 
 json.set! :comments do 
-    post.comments.order(created_at: :desc).map { |comment| json.set! comment.id do json.extract! comment, :commentable_type, :commentable_id, :body, :user_id end }
+    post.comments.order(created_at: :desc).map do |comment| 
+        json.set! comment.id do 
+            json.extract! comment, :id, :commentable_type, :commentable_id, :body, :user_id
+
+            json.set! :likes do 
+                comment.likes.order(created_at: :desc).map { |like| json.set! like.id do json.extract! like, :user_id, :likeable_type, :likeable_id end }
+            end
+        end     
+    end
 end

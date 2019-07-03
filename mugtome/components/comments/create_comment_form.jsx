@@ -23,11 +23,15 @@ class CreateCommentForm extends React.Component {
             commentable_id: this.props.typeId,
             comment: this.state
         }
-        this.props.createComment(params);
-        this.setState({
-            body: ""
+        this.props.createComment(params).then(() => {
+            this.props.requestPost(params.commentable_id).then((post) => {
+                this.setState({
+                    body: ""
+                });
+                this.props.updatePost(post.post)
+                // window.location.reload();
+            });
         });
-        window.location.reload();
     }
 
     render() {
