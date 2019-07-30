@@ -8,6 +8,7 @@ $FB_BLUE: #4267b2;
     flex-direction: column;
     height: 100vh;
     justify-content: space-between;
+    background-color: #e9ebee;
 }
 
 #logged-out-header {
@@ -15,6 +16,8 @@ $FB_BLUE: #4267b2;
     display: flex;
     justify-content: center;
     height: 8%;
+    max-height: 67px;
+    min-height: 67px;
 }
 
 #login-form-container {
@@ -91,20 +94,39 @@ $FB_BLUE: #4267b2;
 }
 
 #greeting-main {
-    background-color: #E9EBEE;
-    height: 65%;
+    // background-color: #E9EBEE;
+    // height: 65%;
     display: flex;
     justify-content: center;
+    max-height: 550px;
+    min-height: 550px;
+
+    // display: grid;
+    // grid-template-columns: 1fr 580px 400px 1fr;
+    // margin: 0;
+    // padding: 20px 0;
+    // background: #e9ebee;
 }
 
 #greeting-main-container {
+    display: grid;
+    grid-template-columns: 1fr 580px 400px 1fr;
+    margin: 0;
+    padding: 20px 0;
+
+    min-width: 980px;
+    
     display: flex;
     width: 50%;
 
     #self-adverts {
-        width: 50%;
-        display: flex;
-        align-items: center;
+        // width: 50%;
+        // display: flex;
+        // align-items: center;
+            grid-column: 2;
+    max-width: 580px;
+    margin: 0;
+    padding-right: 48px;
         
 
         img {
@@ -306,6 +328,9 @@ $FB_BLUE: #4267b2;
     height: 30%;
     display: flex;
     justify-content: center;
+    background-color: #fff;
+    max-height: 250px;
+    min-height: 250px;
 
     #footer-main {
         width: 50%;
