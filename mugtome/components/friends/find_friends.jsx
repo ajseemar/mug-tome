@@ -16,7 +16,7 @@ class FindFriends extends React.Component {
     populateState() {
         const { users, currentUser } = this.props;
         const incoming = this.props.friendRequests.incoming.map(req => req.user_id);
-        const outgoing = this.props.friendRequests.outgoing.map(req => req.friend_id)
+        const outgoing = this.props.friendRequests.outgoing.map(req => req.friend_id);
         let candidates = Object.values(users).filter(user => (
             !currentUser.friendIds.includes(user.id) && user.id !== currentUser.id &&
             !incoming.includes(user.id) && !outgoing.includes(user.id)
@@ -36,11 +36,11 @@ class FindFriends extends React.Component {
 
     checkForRequests(field) {
         if (field === "incoming") {
-            if (this.props.friendRequests.incoming.length === 0) {
+            if (this.props.friendRequests.incoming && this.props.friendRequests.incoming.length === 0) {
                 return <p id='request-title-header'>No New Friend Requests</p>
             } else this.renderFriendRequests()
         } else {
-            if (this.props.friendRequests.outgoing.length === 0) {
+            if (this.props.friendRequests.outgoing && this.props.friendRequests.outgoing.length === 0) {
                 return <p id='request-title-header'>No Pending Friend Requests</p>
             } else this.renderFriendRequests()
         }
